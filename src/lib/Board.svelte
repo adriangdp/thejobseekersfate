@@ -4,10 +4,27 @@
     import JobRow from "./JobRow.svelte";
     import AddApplication from "./AddApplication.svelte";
     import app from "../main";
+    import { derived } from "svelte/store";
+    import type { Application } from "@data/types";
+    import BoardFilter from "@lib/BoardFilter.svelte";
 
     let applications = liveQuery(()=> db.application.toArray())
+   
 
+    let showRejected: boolean = $state(true)
+    let showPending: boolean = $state(true)
+    let showInProgress: boolean = $state(true)
+
+    let filteredApplications = $derived(
+        $applications.filter(a =>
+            a.status === 0 && showRejected ||
+            a.status === 1 && showPending ||
+            a.status === 2 && showInProgress
+        )|| []
+    )
 </script>
+
+<BoardFilter bind:showRejected bind:showPending bind:showInProgress ></BoardFilter>
 
 <table>
     <thead>
@@ -22,7 +39,7 @@
     </thead>
     <tbody>
         {#if $applications}
-            {#each $applications as application (application.id)}
+            {#each filteredApplications as application }
                 <JobRow {application}></JobRow>
             {/each}
         {/if}

@@ -1,13 +1,28 @@
 <script lang="ts">
-   import { type Application } from "../data/types";
+   import { type Application } from "../data/types"
+    import cardRejected from "/card-rejected.svg"
+   import cardApplied from "/card-applied.svg"
+   import cardContacted from "/card-contacted.svg"
+
 
    let { application } : {application:Application}  = $props();
    let {status,position,company,mode,salary,link} = $derived(application)
+
+   const getStatusIcon = () =>{
+        switch(status){
+            case 0 : {return cardRejected}
+            case 1 : {return cardApplied}
+            case 2 : {return cardContacted}
+            default:{
+                throw new Error ("Could not fetch status card for job " + position + " at " + company) 
+            }
+        }
+   }
 </script>
 
 
 <tr>
-    <td>{status}</td>
+    <td><img src={getStatusIcon()} width="96" alt={"status"}/></td>
     <td>{position}</td>
     <td>{company}</td>
     <td>{mode}</td>

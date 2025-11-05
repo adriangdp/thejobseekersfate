@@ -1,12 +1,10 @@
 <script lang="ts">
-    import { liveQuery } from "dexie";
-    import { db, clearTable } from "@data/db";
-    import JobRow from "./JobRow.svelte";
-    import AddApplication from "./AddApplication.svelte";
-    import app from "../main";
-    import { derived } from "svelte/store";
-    import type { Application } from "@data/types";
-    import BoardFilter from "@lib/BoardFilter.svelte";
+    import { liveQuery } from "dexie"
+    import { db, clearTable } from "@data/db"
+    import { applicationStates } from "@data/types"
+    import JobRow from "./JobRow.svelte"
+    import AddApplication from "./AddApplication.svelte"
+    import BoardFilter from "@lib/BoardFilter.svelte"
 
     let applications = liveQuery(()=> db.application.toArray())
    
@@ -17,9 +15,9 @@
 
     let filteredApplications = $derived(
         $applications.filter(a =>
-            a.status === 0 && showRejected ||
-            a.status === 1 && showPending ||
-            a.status === 2 && showInProgress
+            applicationStates.Rejected && showRejected ||
+            applicationStates.Applied && showPending ||
+            applicationStates.Contacted && showInProgress
         )|| []
     )
 </script>

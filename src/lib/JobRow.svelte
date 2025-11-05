@@ -1,6 +1,6 @@
 <script lang="ts">
-   import { type Application } from "../data/types"
-    import cardRejected from "/card-rejected.svg"
+   import { type Application, applicationStates } from "../data/types"
+   import cardRejected from "/card-rejected.svg"
    import cardApplied from "/card-applied.svg"
    import cardContacted from "/card-contacted.svg"
 
@@ -10,9 +10,9 @@
 
    const getStatusIcon = () =>{
         switch(status){
-            case 0 : {return cardRejected}
-            case 1 : {return cardApplied}
-            case 2 : {return cardContacted}
+            case applicationStates.Rejected : {return cardRejected}
+            case applicationStates.Applied : {return cardApplied}
+            case applicationStates.Contacted : {return cardContacted}
             default:{
                 throw new Error ("Could not fetch status card for job " + position + " at " + company) 
             }

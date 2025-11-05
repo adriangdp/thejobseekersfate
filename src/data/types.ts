@@ -1,6 +1,12 @@
+export enum applicationStates{
+    Applied = "Applied",
+    Rejected = "Rejected",
+    Contacted = "Contacted"
+}
+
 export type Application = {
     id:number,
-    status:number,
+    status:applicationStates,
     position:string,
     company:string,
     mode?:string,

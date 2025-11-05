@@ -59,6 +59,7 @@
                     <button 
                         onclick={()=> selectedStatus = option.value}
                         title={`option_${option.label}`}
+                        type="button"
                     >
                         <img src={option.image} alt={`Status icon: ${option.label}`} class="w-full h-auto"/>
                     </button>

@@ -12,4 +12,5 @@ export type Application = {
     mode?:string,
     salary:number,
     link:string,
+    appliedDate:Date,
 }

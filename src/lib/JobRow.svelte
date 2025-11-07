@@ -6,7 +6,7 @@
 
 
    let { application } : {application:Application}  = $props();
-   let {status,position,company,mode,salary,link} = $derived(application)
+   let {status,position,company,mode,salary,link,appliedDate} = $derived(application)
 
    const getStatusIcon = () =>{
         switch(status){
@@ -28,6 +28,7 @@
     <td>{mode}</td>
     <td>{salary}</td>
     <td>{link}</td>
+    <td>{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
 </tr>
 
 <style>

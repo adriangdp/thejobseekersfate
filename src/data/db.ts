@@ -12,7 +12,7 @@ const db = new Dexie('applications') as Dexie & {
 
 
 db.version(1).stores({
-    application:'++id, status, position, company, mode, salary, link'
+    application:'++id, status, position, company, mode, salary, link, date'
 })
 
 const clearTable = () =>{

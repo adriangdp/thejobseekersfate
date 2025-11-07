@@ -30,8 +30,9 @@
         event.preventDefault()
         const form = event.target as HTMLFormElement
         const formData = new FormData(form)
-         formData.set('status', selectedStatus.toString())
-         console.log(selectedStatus)
+        formData.set('status', selectedStatus.toString())
+        formData.set('date', new Date().toISOString())
+        console.log(selectedStatus)
 
         try{
             const data = Object.fromEntries(formData.entries())

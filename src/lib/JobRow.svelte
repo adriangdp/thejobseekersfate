@@ -31,10 +31,3 @@
     <td>{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
 </tr>
 
-<style>
-    td{
-        border-color: beige;
-        border-width: 1px;
-        padding: 1em 2em;
-    }
-</style>

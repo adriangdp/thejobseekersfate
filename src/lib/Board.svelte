@@ -45,13 +45,3 @@
 </table>
 <AddApplication></AddApplication>
 <button onclick={clearTable}> Clear data</button>
-<style>
-    th{
-        border-color: beige;
-        border-width: 1px;
-        padding: 1em 2em;
-    }
-    .fullrow{
-        padding: 0;
-    }
-</style>

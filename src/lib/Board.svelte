@@ -10,6 +10,7 @@
     let applications = liveQuery(()=> db.application.toArray())
    
     let isCardDisplay: boolean = $state(true)
+    let showAddApplicationModal:boolean = $state(false)
     let showRejected: boolean = $state(true)
     let showPending: boolean = $state(true)
     let showInProgress: boolean = $state(true)
@@ -23,7 +24,10 @@
     )
 </script>
 
-<button class="border-2 border-accent-outer bg-accent-inner p-3 m-5" onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
+<div class="flex gap-2">
+<button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
+<button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
+</div>
 <BoardFilter bind:showRejected bind:showPending bind:showInProgress ></BoardFilter>
 {#if $applications}
     {#if isCardDisplay}
@@ -54,6 +58,8 @@
         </table>
     {/if}
 {/if}
+{#if showAddApplicationModal}
+    <AddApplication bind:showAddApplicationModal />
+{/if}
 
-<AddApplication></AddApplication>
 <button onclick={clearTable}> Clear data</button>

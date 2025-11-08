@@ -6,6 +6,8 @@
     import cardApplied from "/card-applied.svg"
     import cardContacted from "/card-contacted.svg"
 
+    let{ showAddApplicationModal = $bindable() } = $props()
+  
     let selectedStatus:applicationStates = $state(applicationStates.Applied)
 
     const statusOptions = [
@@ -46,52 +48,57 @@
         } catch(error){
             console.log(error)
         }
+        showAddApplicationModal = false;
     }
 
 </script>
-<form onsubmit={handleNewApplication}>
-    <div class="flex items-center gap-1 m-5">
-        <div>
-            <label for="input-status">Status</label>
-            <div class="flex justify-center items-center gap-2 mt-3">
-                {#each statusOptions as option}
-                <div class="w-1/3">
-                    <button 
-                        onclick={()=> selectedStatus = option.value}
-                        title={`option_${option.label}`}
-                        type="button"
-                        class="button-invisible"
-                    >
-                        <img src={option.image} alt={`Status icon: ${option.label}`} class="w-full h-auto"/>
-                    </button>
-                    <label for={`option_${option.label}`}>{option.label}</label>
+<div class="absolute top-0 left-0 w-screen h-screen p-40 bg-accent-inner/20 backdrop-blur-xs">
+    <div class="flex justify-center items-center bg-accent-inner/90 border-2 rounded-md border-accent-outer ">
+        <form onsubmit={handleNewApplication}>
+            <div class="flex items-center gap-1 m-5">
+                <div>
+                    <label for="input-status">Status</label>
+                    <div class="flex justify-center items-center gap-2 mt-3">
+                        {#each statusOptions as option}
+                        <div class="w-1/3">
+                            <button 
+                                onclick={()=> selectedStatus = option.value}
+                                title={`option_${option.label}`}
+                                type="button"
+                                class="button-invisible"
+                            >
+                                <img src={option.image} alt={`Status icon: ${option.label}`} class="w-full h-auto"/>
+                            </button>
+                            <label for={`option_${option.label}`}>{option.label}</label>
+                        </div>                
+                        {/each}
+                    </div>
+                </div>
+                <div>
+                    <label for="input-position">Position</label>
+                    <input name="position" id="input-position" type="text"/>
+                </div>
+                <div>
+                    <label for="input-company">Company</label>
+                    <input name="company" id="input-company" type="text"/>
                 </div>                
-                {/each}
-            </div>
+                <div>
+                    <label for="input-mode">Mode</label>
+                    <input name="mode" id="input-mode" type="text"/>
+                </div>
+                <div>
+                    <label for="input-salary">Salary</label>
+                    <input name="salary" id="input-salary" type="number"/>
+                </div>
+                <div>
+                    <label for="input-link">Link</label>
+                    <input name="link" id="input-link" type="url"/>
+                </div>
+            </div> 
+            <button type="submit" class="w-full h-full"> Apply here</button>
+            <p>Todo: add a proper closing button and auto close only on "try" success</p>
+        </form>
 
-        </div>
-        <div>
-            <label for="input-position">Position</label>
-            <input name="position" id="input-position" type="text"/>
-        </div>
-        <div>
-            <label for="input-company">Company</label>
-            <input name="company" id="input-company" type="text"/>
-        </div>
-        
-        <div>
-            <label for="input-mode">Mode</label>
-            <input name="mode" id="input-mode" type="text"/>
-        </div>
-        <div>
-            <label for="input-salary">Salary</label>
-            <input name="salary" id="input-salary" type="number"/>
-        </div>
+    </div>  
+</div>
 
-        <div>
-            <label for="input-link">Link</label>
-            <input name="link" id="input-link" type="url"/>
-        </div>
-    </div> 
-    <button type="submit" class="w-full h-full"> Apply here</button>
-</form>

@@ -21,4 +21,13 @@
   }
 }
 
+@layer components{
+  button{
+    @apply border-2 border-accent-outer bg-accent-inner p-2 m-3 rounded-sm
+  }
+
+  .button-invisible{
+    @apply border-0 bg-transparent p-2 m-3 rounded-none
+  }
+}
 

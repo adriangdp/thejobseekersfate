@@ -2,9 +2,11 @@
     import { db } from "@data/db"
     import { applicationSchema } from "@data/validation-schemas"
     import { applicationStates } from "@data/types"
+    import CloseButton from "@lib/common/CloseButton.svelte"
     import cardRejected from "/card-rejected.svg"
     import cardApplied from "/card-applied.svg"
     import cardContacted from "/card-contacted.svg"
+
 
     let{ showAddApplicationModal = $bindable() } = $props()
   
@@ -53,7 +55,7 @@
 
 </script>
 <div class="absolute top-0 left-0 w-screen h-screen p-40 bg-accent-inner/20 backdrop-blur-xs">
-    <div class="flex justify-center items-center bg-accent-inner/90 border-2 rounded-md border-accent-outer ">
+    <div class="relative bg-accent-inner/90 border-2 rounded-md border-accent-outer">
         <form onsubmit={handleNewApplication}>
             <div class="flex items-center gap-1 m-5">
                 <div>
@@ -96,9 +98,9 @@
                 </div>
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>
-            <p>Todo: add a proper closing button and auto close only on "try" success</p>
         </form>
-
+        <CloseButton bind:isOpen={showAddApplicationModal} positioning="absolute top-0 right-0"/>         
     </div>  
+          
 </div>
 

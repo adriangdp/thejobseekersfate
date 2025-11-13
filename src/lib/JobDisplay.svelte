@@ -24,6 +24,7 @@
     <div class="bg-accent-inner flex flex-col p-3 border-accent-outer border-1">
         <p>{position}</p>
         <p>{company}</p>
+        <p>{mode}</p>
         <p>{salary}</p>
         <p>{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</p>
     </div>

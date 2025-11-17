@@ -22,6 +22,6 @@
 
 </script>
 
-<div class={`inline-flex items-center justify-center px-2 py-1 w-fit rounded-full border-2 ${labelColor(true,true,false)} `}>
+<div class={`inline-flex items-center justify-center px-2 py-1 w-fit rounded-full border-2 brightness-200 ${labelColor(true,true,false)} `}>
     <p class={`${labelColor(false,false,true)} text-sm`}>{state}</p>
 </div>

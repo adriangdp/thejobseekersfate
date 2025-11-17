@@ -1,12 +1,14 @@
 <script lang="ts">
     import { db } from "@data/db"
     import { applicationSchema } from "@data/validation-schemas"
-    import { applicationStates } from "@data/types"
+    import { applicationStates, type Application } from "@data/types"
     import CloseButton from "@lib/common/CloseButton.svelte"
     import cardRejected from "/card-rejected.svg"
     import cardApplied from "/card-applied.svg"
     import cardContacted from "/card-contacted.svg"
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
+    import app from "../main";
+    import type { EventHandler } from "svelte/elements";
 
 
     let{ showAddApplicationModal = $bindable() } = $props()
@@ -40,18 +42,22 @@
 
         try{
             const data = Object.fromEntries(formData.entries())
-            console.log(data)
+
             const validateData = applicationSchema.parse(data)
             const id = await db.application.add(validateData)
-
-            console.log(`Created entry with id ${id}`)
-            console.log(validateData)
+            
             form.reset()
             selectedStatus = applicationStates.Applied
+            showAddApplicationModal = false
         } catch(error){
             console.log(error)
         }
-        showAddApplicationModal = false;
+        
+    }
+
+    const handleSelectApplicationState = (button:HTMLButtonElement, choice:applicationStates) =>{
+
+        selectedStatus = choice
     }
 
 </script>
@@ -63,17 +69,9 @@
                     <label for="input-status">Status</label>
                     <div class="flex justify-center items-center gap-2 mt-3">
                         {#each statusOptions as option}
-                        <div class="w-1/3">
-                            <button 
-                                onclick={()=> selectedStatus = option.value}
-                                title={`option_${option.label}`}
-                                type="button"
-                                class="button-invisible"
-                            >
-                                <img src={option.image} alt={`Status icon: ${option.label}`} class="w-full h-auto"/>
-                            </button>
-                            <label for={`option_${option.label}`}>{option.label}</label>
-                        </div>                
+                            <button type="button" class={`button-invisible cursor-pointer ${option.value === selectedStatus? 'opacity-100':'opacity-40'}`}  onclick={(e)=>handleSelectApplicationState(e.currentTarget as HTMLButtonElement, option.value)}>
+                                <BadgeStatus state={option.value}></BadgeStatus>
+                            </button>                                  
                         {/each}
                     </div>
                 </div>

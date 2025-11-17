@@ -8,8 +8,8 @@
 
   --color-card-offer: oklch(18.25% 0.005 82.262);
   --color-card-pending: oklch(27.25% .018 82.262);
-  --color-card-interview: oklch(24.048% 0.01039 311.942);
-  --color-card-rejected: oklch(10% 0.07 0);
+  --color-card-interview: oklch(35% 0.07 275);
+  --color-card-rejected: oklch(36% 0.3 25);
   --color-card-ghosted: oklch(19.048% 0.003 215);
   --color-card-accepted: oklch(24.048% 0.01039 125.942);
 }
@@ -22,12 +22,13 @@
 }
 
 @layer components{
-  button{
-    @apply border-2 border-accent-outer bg-accent-inner p-2 m-3 rounded-sm
+  button, input{
+    @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm
   }
 
   .button-invisible{
-    @apply border-0 bg-transparent p-2 m-3 rounded-none
+    @apply border-0 bg-transparent p-2 rounded-none
   }
+
 }
 

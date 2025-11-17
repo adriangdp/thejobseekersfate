@@ -6,6 +6,7 @@
     import cardRejected from "/card-rejected.svg"
     import cardApplied from "/card-applied.svg"
     import cardContacted from "/card-contacted.svg"
+    import BadgeStatus from "@lib/common/BadgeStatus.svelte";
 
 
     let{ showAddApplicationModal = $bindable() } = $props()

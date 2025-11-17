@@ -3,6 +3,7 @@
    import cardRejected from "/card-rejected.svg"
    import cardApplied from "/card-applied.svg"
    import cardContacted from "/card-contacted.svg"
+    import BadgeStatus from "@lib/common/BadgeStatus.svelte";
 
 
    let { application, isCardDisplay } : {application:Application, isCardDisplay:boolean}  = $props();
@@ -30,7 +31,7 @@
     </div>
 {:else}
     <tr>
-        <td><img src={getStatusIcon()} width="96" alt={"status"}/></td>
+        <td><BadgeStatus state={status}/></td>
         <td>{position}</td>
         <td>{company}</td>
         <td>{mode}</td>

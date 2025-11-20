@@ -8,10 +8,15 @@
     import JobDisplay from "@lib/JobDisplay.svelte"
     
     let isCardDisplay: boolean = $state(true)
+
     let showAddApplicationModal:boolean = $state(false)
     let showRejected: boolean = $state(true)
-    let showapplied: boolean = $state(true)
-    let showInProgress: boolean = $state(true)
+    let showApplied: boolean = $state(true)
+    let showInterview: boolean = $state(true)
+    let showOffer: boolean = $state(true)
+    let showAccepted: boolean = $state(true)
+    let showGhosted: boolean = $state(true)
+
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
 
@@ -38,9 +43,12 @@
     let filteredApplications = $derived.by(
         ():JobApplication[]=>{       
             let filteredArray = jobApplications.filter(a =>
-            (a.status.toString() == JobStates.rejected.toString() && showRejected) ||
-            (a.status.toString() == JobStates.applied.toString() && showapplied) ||
-            (a.status.toString() == JobStates.interview.toString() && showInProgress)
+            (a.status.situation === JobStates.rejected.situation && showRejected) ||
+            (a.status.situation === JobStates.applied.situation && showApplied) ||
+            (a.status.situation === JobStates.interview.situation && showInterview) ||
+            (a.status.situation === JobStates.offer.situation && showOffer) ||
+            (a.status.situation === JobStates.accepted.situation && showAccepted) ||
+            (a.status.situation === JobStates.ghosted.situation && showGhosted)
             )|| []
 
 
@@ -62,7 +70,17 @@
 <button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
 <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
 </div>
-<BoardFilter bind:showRejected bind:showapplied bind:showInProgress bind:sortBy bind:isAscendent></BoardFilter>
+<BoardFilter 
+    bind:showRejected 
+    bind:showApplied 
+    bind:showInterview 
+    bind:showAccepted
+    bind:showOffer
+    bind:showGhosted
+    bind:sortBy 
+    bind:isAscendent
+>
+</BoardFilter>
 {#if filteredApplications}
     {#if isCardDisplay}
         <div class="grid grid-cols-2 md:grid-cols-2 gap-3">

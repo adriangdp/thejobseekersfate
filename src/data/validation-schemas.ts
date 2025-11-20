@@ -1,8 +1,9 @@
+import { JobStates } from "@data/jobStates";
 import { z } from "zod";
-import { applicationStates } from "@data/types";
+
 
 export const applicationSchema = z.object({
-    status: z.enum(applicationStates),
+    statusKey: z.string(),
     position: z.string().min(1,"Application position needed"),
     company: z.string().min(1,"Company name needed"),
     mode: z.string().default("unknown"),

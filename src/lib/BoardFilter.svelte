@@ -1,9 +1,8 @@
 <script lang="ts">
-    import type { Application } from "@data/types";
 
     let { 
      showRejected  = $bindable(),
-     showPending  = $bindable(),
+     showapplied  = $bindable(),
      showInProgress  = $bindable(),
      sortBy = $bindable(),
      isAscendent = $bindable()
@@ -18,7 +17,7 @@
             <button onclick={()=>showRejected = !showRejected}>{showRejected ? "Hide rejected" : "Show rejected"}</button>
         </li>
         <li>
-            <button onclick={()=>showPending = !showPending}>{showPending ? "Hide pending response" : "Show pending response"}</button>
+            <button onclick={()=>showapplied = !showapplied}>{showapplied ? "Hide applied response" : "Show applied response"}</button>
         </li>
         <li>
             <button onclick={()=>showInProgress = !showInProgress}>{showInProgress ? "Hide in progress" : "Show in progress"}</button>

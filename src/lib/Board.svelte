@@ -1,7 +1,8 @@
 <script lang="ts">
     import { liveQuery } from "dexie"
     import { db, clearTable } from "@data/db"
-    import { applicationStates, type Application } from "@data/types"
+    import { type JobState, type JobApplication, type JobData } from "@data/types"
+    import { JobStates } from "@data/jobStates"
     import AddApplication from "./AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
@@ -9,27 +10,44 @@
     let isCardDisplay: boolean = $state(true)
     let showAddApplicationModal:boolean = $state(false)
     let showRejected: boolean = $state(true)
-    let showPending: boolean = $state(true)
+    let showapplied: boolean = $state(true)
     let showInProgress: boolean = $state(true)
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
 
-    let applications:Application[] = $state([])
-    liveQuery(()=> db.application.toArray()).subscribe(data => applications = [...data])
+    let jobData:JobData[] = $state([])
+    liveQuery(()=> db.jobData.toArray()).subscribe(data => jobData = [...data])
+    let jobApplications:JobApplication[] = $derived.by(():JobApplication[]=>{
+        return jobData.map(e=>{
+            let job:JobApplication = {
+                id:e.id,
+                status: JobStates[e.statusKey],
+                position: e.position,
+                company: e.company,
+                salary: e.salary,
+                link: e.link,
+                appliedDate: e.appliedDate                
+            }
+            if(e.mode){
+                job.mode = e.mode
+            } 
+            return job
+        })
+    })
     
     let filteredApplications = $derived.by(
-        ():Application[]=>{            
-            let filteredArray = applications.filter(a =>
-            (a.status === applicationStates.Rejected && showRejected) ||
-            (a.status === applicationStates.Applied && showPending) ||
-            (a.status === applicationStates.Contacted && showInProgress)
+        ():JobApplication[]=>{       
+            let filteredArray = jobApplications.filter(a =>
+            (a.status.toString() == JobStates.rejected.toString() && showRejected) ||
+            (a.status.toString() == JobStates.applied.toString() && showapplied) ||
+            (a.status.toString() == JobStates.interview.toString() && showInProgress)
             )|| []
 
 
             filteredArray.sort((a,b):number=>{
                 switch(sortBy){
                     case("salary") : { return isAscendent ? a.salary - b.salary : b.salary - a.salary}
-                    case("status") : { return isAscendent ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status)}
+                    case("status") : { return isAscendent ? a.status.toString().localeCompare(b.status.toString()) : b.status.toString().localeCompare(a.status.toString())}
                     case("date") : {return isAscendent ? a.appliedDate.getTime() - b.appliedDate.getTime() : b.appliedDate.getTime() - a.appliedDate.getTime()}
                     default: return a.id-b.id
                 }
@@ -44,10 +62,10 @@
 <button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
 <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
 </div>
-<BoardFilter bind:showRejected bind:showPending bind:showInProgress bind:sortBy bind:isAscendent></BoardFilter>
-{#if applications}
+<BoardFilter bind:showRejected bind:showapplied bind:showInProgress bind:sortBy bind:isAscendent></BoardFilter>
+{#if filteredApplications}
     {#if isCardDisplay}
-        <div class="flex">
+        <div class="grid grid-cols-2 md:grid-cols-2 gap-3">
             {#each filteredApplications as cardApplication}
                 <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
             {/each}

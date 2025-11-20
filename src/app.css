@@ -6,19 +6,21 @@
   --color-accent-outer: oklch(34% .022 85.262);
   --color-accent-inner: oklch(26% .016 85.262);
 
-  --color-card-offer: oklch(18.25% 0.005 82.262);
-  --color-card-pending: oklch(27.25% .018 82.262);
-  --color-card-interview: oklch(35% 0.07 275);
-  --color-card-rejected: oklch(36% 0.3 25);
-  --color-card-ghosted: oklch(19.048% 0.003 215);
-  --color-card-accepted: oklch(24.048% 0.01039 125.942);
+  --color-card-offer: oklch(65% 0.013 75.24);
+  --color-card-applied: #817866;
+  --color-card-interview: #30375f;
+  --color-card-rejected: #a70000;
+  --color-card-ghosted: #424a4e;
+  --color-card-accepted: #5d6b49;
 }
 
 @layer base{
   html{
     background-color: var(--color-background);
     color: var(--color-text-body);
+   
   }
+  
 }
 
 @layer components{

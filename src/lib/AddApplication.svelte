@@ -2,12 +2,9 @@
     import { db } from "@data/db"
     import { JobStates } from "@data/jobStates"
     import { applicationSchema } from "@data/validation-schemas"
-    import CloseButton from "@lib/common/CloseButton.svelte"
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
-    import type { JobState } from "@data/types";
-    import { keyof } from "zod";
 
-    let{ showAddApplicationModal = $bindable() } = $props()
+    let{ showAddApplicationModal = $bindable() } : {showAddApplicationModal : boolean}= $props()
   
     let selectedStatus:string = $state("offer")
 
@@ -24,7 +21,6 @@
             const id = await db.jobData.add(parseData)
             
             form.reset()
-            selectedStatus = "offer"
             showAddApplicationModal = false
         } catch(error){
             console.log(error)

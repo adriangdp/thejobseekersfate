@@ -116,7 +116,7 @@
     {/if}
     {#if showAddApplicationModal}
     <Modal bind:isOpen={showAddApplicationModal}>
-        <AddApplication />
+        <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
     </Modal>
 
     {/if}

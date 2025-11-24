@@ -3,7 +3,8 @@ import type { JobState, ReadOnlyDictionary} from "@data/types";
 export const JobStates:ReadOnlyDictionary<JobState> = {
     offer:{
         situation:"Offer",
-        icon: "/img/icon-star.png",
+        figureName:"The Wheel of Fortune",
+        icon: "/img/icon-fortunewheel.png",
         styles:{
             color:"color-card-offer",
             background:"bg-card-offer",
@@ -19,7 +20,8 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
 
     applied:{
         situation:"Applied",
-        icon: "/img/icon-tower.png",
+        figureName:"The Waiting",
+        icon: "/img/icon-sandclock.png",
         styles:{
             color:"color-card-applied",
             background:"bg-card-applied",
@@ -34,6 +36,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     },
     rejected:{
         situation:"Rejected",
+        figureName:"The Reaper",
         icon: "/img/icon-reaper.png",
         styles:{
             color:"color-card-rejected",
@@ -49,6 +52,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     },
     interview:{
         situation:"Interview",
+        figureName:"The Judgement",
         icon: "/img/icon-scale.png",
         styles:{
             color:"color-card-interview",
@@ -64,7 +68,8 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     },
     ghosted:{        
         situation:"Ghosted",
-        icon: "/img/icon-scale.png",
+        figureName:"The Ghost",
+        icon: "/img/icon-ghost.png",
         styles:{
             color:"color-card-ghosted",
             background:"bg-card-ghosted",
@@ -79,7 +84,8 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     },
     accepted:{
         situation:"Accepted",
-        icon: "/img/icon-scale.png",
+        figureName:"The Star",
+        icon: "/img/icon-star.png",
         styles:{
             color:"color-card-accepted",
             background:"bg-card-accepted",

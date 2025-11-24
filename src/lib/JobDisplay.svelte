@@ -1,11 +1,6 @@
 <script lang="ts">
-    import { type JobState, type JobApplication } from "../data/types"
-    import { JobStates } from "@data/jobStates"
+    import { type JobApplication } from "../data/types"
     import BadgeStatus from "@lib/common/BadgeStatus.svelte"
-    import iconReaper from "/img/icon-reaper.png"
-    import iconScale from "/img/icon-scale.png"
-    import iconStar from "/img/icon-star.png"
-    import iconTower from "/img/icon-tower.png"
 
 
    let { application, isCardDisplay } : {application:JobApplication, isCardDisplay:boolean}  = $props();

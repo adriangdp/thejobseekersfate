@@ -25,6 +25,7 @@ export type JobData = {
 
 export type JobState ={
     situation:string,
+    figureName:string,
     icon:string,
     styles:{
         color:string,

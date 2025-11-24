@@ -7,8 +7,6 @@
     import type { JobState } from "@data/types";
     import { keyof } from "zod";
 
-
-
     let{ showAddApplicationModal = $bindable() } = $props()
   
     let selectedStatus:string = $state("offer")
@@ -35,8 +33,7 @@
     }
 
 </script>
-<div class="z-40 absolute top-0 left-0 w-screen h-screen p-40 bg-accent-inner/20 backdrop-blur-xs">
-    <div class="relative bg-accent-inner/90 border-2 rounded-md border-accent-outer">
+
         <form onsubmit={handleNewApplication}>
             <div class="flex items-center gap-1 m-5">
                 <div>
@@ -72,8 +69,5 @@
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>
         </form>
-        <CloseButton bind:isOpen={showAddApplicationModal} positioning="absolute top-0 right-0"/>         
-    </div>  
-          
-</div>
+
 

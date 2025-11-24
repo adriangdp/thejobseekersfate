@@ -6,6 +6,7 @@
     import AddApplication from "./AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
+    import Modal from "@lib/Modal.svelte"
     
     let isCardDisplay: boolean = $state(true)
 
@@ -16,6 +17,8 @@
     let showOffer: boolean = $state(true)
     let showAccepted: boolean = $state(true)
     let showGhosted: boolean = $state(true)
+
+    let preventScroll: boolean = $derived(showAddApplicationModal)
 
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
@@ -66,52 +69,58 @@
     )
 </script>
 
-<div class="flex gap-2">
-<button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
-<button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
-</div>
-<BoardFilter 
-    bind:showRejected 
-    bind:showApplied 
-    bind:showInterview 
-    bind:showAccepted
-    bind:showOffer
-    bind:showGhosted
-    bind:sortBy 
-    bind:isAscendent
->
-</BoardFilter>
-{#if filteredApplications}
-    {#if isCardDisplay}
-        <div class="grid grid-cols-2 md:grid-cols-2 gap-3">
-            {#each filteredApplications as cardApplication}
-                <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
-            {/each}
-        </div>
-    {:else}
-        <table>
-            <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Position</th>
-                    <th>Company</th>
-                    <th>Mode</th>
-                    <th>Salary</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-            
-                {#each filteredApplications as application }
-                    <JobDisplay application={application} isCardDisplay={false}></JobDisplay>
+<div class={`${preventScroll ? 'h-screen overflow-hidden':''}`}>
+    <div class="flex gap-2">
+        <button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
+        <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
+    </div>
+    <BoardFilter 
+        bind:showRejected 
+        bind:showApplied 
+        bind:showInterview 
+        bind:showAccepted
+        bind:showOffer
+        bind:showGhosted
+        bind:sortBy 
+        bind:isAscendent
+    >
+    </BoardFilter>
+    {#if filteredApplications}
+        {#if isCardDisplay}
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-3">
+                {#each filteredApplications as cardApplication}
+                    <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
                 {/each}
-        
-            </tbody>
-        </table>
+            </div>
+        {:else}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Position</th>
+                        <th>Company</th>
+                        <th>Mode</th>
+                        <th>Salary</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    {#each filteredApplications as application }
+                        <JobDisplay application={application} isCardDisplay={false}></JobDisplay>
+                    {/each}
+            
+                </tbody>
+            </table>
+        {/if}
     {/if}
-{/if}
-{#if showAddApplicationModal}
-    <AddApplication bind:showAddApplicationModal />
-{/if}
+    {#if showAddApplicationModal}
+    <Modal bind:isOpen={showAddApplicationModal}>
+        <AddApplication />
+    </Modal>
 
-<button onclick={clearTable}> Clear data</button>
+    {/if}
+
+    <button onclick={clearTable}> Clear data</button>
+</div>
+

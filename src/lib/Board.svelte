@@ -95,7 +95,7 @@
     </BoardFilter>
     {#if filteredApplications}
         {#if isCardDisplay}
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
                 {#each filteredApplications as cardApplication}
                     <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
                 {/each}

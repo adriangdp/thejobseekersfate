@@ -1,4 +1,7 @@
 <script lang="ts">
+    import { JobStates } from "@data/jobStates";
+    import { type JobState, type JobApplication } from "@data/types";
+
 
     let { 
      showRejected  = $bindable(),
@@ -9,33 +12,92 @@
      showGhosted  = $bindable(),
      sortBy = $bindable(),
      isAscendent = $bindable()
-    } = $props()
-
+    }  :
+    {
+        showOffer : boolean,
+        showApplied : boolean,
+        showInterview : boolean,
+        showRejected : boolean,      
+        showGhosted : boolean,
+        showAccepted : boolean,
+        sortBy : string,
+        isAscendent : boolean,
+    }= $props()
 
 </script>
 
-<div>
-    <ul class="flex">
+<div class="my-5">
+    <ul class="flex flex-wrap gap-4 justify-center">
         <li>
-            <button onclick={()=>showRejected = !showRejected}>{showRejected ? "Hide rejected" : "Show rejected"}</button>
+            <button onclick={()=>showOffer = !showOffer}
+                class={`${showOffer? '':'bg-background'}`}
+            >
+                <img src={JobStates.offer.icon} 
+                    alt={`Filter by ${JobStates.offer.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.applied.situation}</span>
+            </button>
         </li>
         <li>
-            <button onclick={()=>showApplied = !showApplied}>{showApplied ? "Hide applied" : "Show applied"}</button>
+            <button onclick={()=>showApplied = !showApplied}
+                class={`${showApplied? '':'bg-background'}`}
+            >
+                <img src={JobStates.applied.icon} 
+                    alt={`Filter by ${JobStates.applied.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.applied.situation}</span>
+            </button>
         </li>
         <li>
-            <button onclick={()=>showInterview = !showInterview}>{showInterview ? "Hide interview" : "Show interview"}</button>
+            <button onclick={()=>showInterview = !showInterview}
+                class={`${showInterview? '':'bg-background'}`}
+            >
+                <img src={JobStates.interview.icon} 
+                    alt={`Filter by ${JobStates.interview.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.interview.situation}</span>
+            </button>
         </li>
         <li>
-            <button onclick={()=>showAccepted = !showAccepted}>{showAccepted ? "Hide accepted" : "Show accepted"}</button>
+            <button onclick={()=>showRejected = !showRejected}
+                class={`${showRejected? '':'bg-background'}`}
+            >
+                <img src={JobStates.rejected.icon} 
+                    alt={`Filter by ${JobStates.rejected.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.rejected.situation}</span>
+            </button>
         </li>
         <li>
-            <button onclick={()=>showGhosted = !showGhosted}>{showGhosted ? "Hide ghosted" : "Show ghosted"}</button>
+            <button onclick={()=>showGhosted = !showGhosted}
+                class={`${showGhosted? '':'bg-background'}`}
+            >
+                <img src={JobStates.ghosted.icon} 
+                    alt={`Filter by ${JobStates.ghosted.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.ghosted.situation}</span>
+            </button>
+        </li>       
+        <li>
+            <button onclick={()=>showAccepted = !showAccepted}
+                class={`${showAccepted? '':'bg-background'}`}
+            >
+                <img src={JobStates.accepted.icon} 
+                    alt={`Filter by ${JobStates.accepted.situation} icon`}
+                    width="20px" height="20px" class="inline"
+                />
+                <span class="text-sm">{JobStates.accepted.situation}</span>
+            </button>
         </li>
         <li>
-            <button onclick={()=>showOffer = !showOffer}>{showOffer ? "Hide offers" : "Show offers"}</button>
-        </li>
-        <li>
-            <select bind:value={sortBy}>
+            <select bind:value={sortBy}
+                class="bg-accent-inner"            
+            >
                 <option value="default">Default</option>
                 <option value="date">Date</option>
                 <option value="salary">Salary</option>

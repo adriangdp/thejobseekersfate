@@ -7,10 +7,11 @@
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
+    import SwitchView from "@lib/SwitchView.svelte"
     
     let isCardDisplay: boolean = $state(true)
-
     let showAddApplicationModal:boolean = $state(false)
+
     let showRejected: boolean = $state(true)
     let showApplied: boolean = $state(true)
     let showInterview: boolean = $state(true)
@@ -69,10 +70,17 @@
     )
 </script>
 
-<div class={`${preventScroll ? 'h-screen overflow-hidden':''}`}>
-    <div class="flex gap-2">
-        <button onclick={()=>{isCardDisplay = !isCardDisplay}}> Change view</button>
-        <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}> Add Job Application</button>
+<div class={`${preventScroll ? 'h-screen overflow-hidden':''} 
+    w-full`
+}>
+    <div class="max-w-full flex flex-wrap gap-2 justify-between">
+        <SwitchView bind:isCardDisplay/>
+        <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
+             class="flex gap-3"
+        > 
+            <img  src="/img/icon-add.png" alt="add job application button icon" width="24px" height="24px" class="brightness-200"/>
+            <span>Add Job Application</span>
+        </button>
     </div>
     <BoardFilter 
         bind:showRejected 

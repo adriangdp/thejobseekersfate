@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 @theme{
-  --color-background: oklch(20.5% .01 48.21);
-  --color-text-body: oklch(65% 0.013 75.24);
-  --color-accent-outer: oklch(34% .022 85.262);
-  --color-accent-inner: oklch(26% .016 85.262);
+  --color-background: #1b1613;
+  --color-text-body: #948E87;
+  --color-text-darker: #6F6962;
+  --color-accent-outer: #3d372b;
+  --color-accent-inner: #28241b;
 
-  --color-card-offer: oklch(65% 0.013 75.24);
-  --color-card-applied: #817866;
+  --color-card-offer: #817866;
+  --color-card-applied: #9c9549;
   --color-card-interview: #30375f;
   --color-card-rejected: #a70000;
   --color-card-ghosted: #424a4e;
@@ -15,16 +16,16 @@
 }
 
 @layer base{
+
   html{
     background-color: var(--color-background);
-    color: var(--color-text-body);
-   
+    color: var(--color-text-body);   
   }
   
 }
 
 @layer components{
-  button, input{
+  button, input, select{
     @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm
   }
 

@@ -2,8 +2,8 @@
   import Board from './lib/Board.svelte';
 </script>
 
-<main>
- <Board></Board>
+<main class="w-11/12 mx-auto my-4">
+  <Board />
 </main>
 
 

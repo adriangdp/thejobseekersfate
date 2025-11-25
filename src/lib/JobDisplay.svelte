@@ -1,6 +1,7 @@
 <script lang="ts">
     import { type JobApplication } from "../data/types"
     import BadgeStatus from "@lib/common/BadgeStatus.svelte"
+    import Modal from "@lib/Modal.svelte";
 
 
    let { application, isCardDisplay } : {application:JobApplication, isCardDisplay:boolean}  = $props();
@@ -42,13 +43,13 @@
     </div>
 {:else}
     <tr>
-        <td><BadgeStatus state={status} /></td>
-        <td>{position}</td>
-        <td>{company}</td>
-        <td>{mode}</td>
-        <td>{salary}</td>
-        <td>{link}</td>
-        <td>{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40"><BadgeStatus state={status} /></td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{position}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{company}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{mode}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{salary}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40"><a href={link}> Offer site </a></td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
     </tr>
 {/if}
 

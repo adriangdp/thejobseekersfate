@@ -101,25 +101,28 @@
                 {/each}
             </div>
         {:else}
-            <table>
-                <thead>
+        <div class="w-full overflow-x-auto">
+            <table class="lg:mx-auto lg:w-full">
+                <thead class="bg-accent-inner">
                     <tr>
-                        <th>Status</th>
-                        <th>Position</th>
-                        <th>Company</th>
-                        <th>Mode</th>
-                        <th>Salary</th>
-                        <th>Link</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Status</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Position</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Company</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Mode</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Salary</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Link</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Added Date</th>
                     </tr>
                 </thead>
-                <tbody>
-                
+                <tbody>                
                     {#each filteredApplications as application }
                         <JobDisplay application={application} isCardDisplay={false}></JobDisplay>
                     {/each}
             
                 </tbody>
             </table>
+        </div>
+
         {/if}
     {/if}
     {#if showAddApplicationModal}

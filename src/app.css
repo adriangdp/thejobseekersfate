@@ -29,6 +29,10 @@
     @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm
   }
 
+  a{
+    @apply text-card-accepted decoration-card-accepted underline underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-interview visited:decoration-card-interview
+  }
+
   .button-invisible{
     @apply border-0 bg-transparent p-2 rounded-none
   }

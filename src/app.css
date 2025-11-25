@@ -13,6 +13,9 @@
   --color-card-rejected: #a70000;
   --color-card-ghosted: #424a4e;
   --color-card-accepted: #5d6b49;
+
+  --font-rosarivo: "Rosarivo", Georgia, "Times New Roman", Times, serif;
+  --font-alegreya: "Alegreya Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
 }
 
 @layer base{
@@ -20,6 +23,16 @@
   html{
     background-color: var(--color-background);
     color: var(--color-text-body);   
+  }
+
+  h1,h2,h3,h4,h5,h6,q,strong{
+    font-family: var(--font-rosarivo);
+    letter-spacing: 0.05em;
+  }
+
+  p,a,li,span,aside,em,i{
+    font-family: var(--font-alegreya);
+    letter-spacing: 0.15em;
   }
   
 }

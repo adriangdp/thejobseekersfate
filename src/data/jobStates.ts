@@ -4,7 +4,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     offer:{
         situation:"Offer",
         figureName:"The Wheel of Fortune",
-        icon: "/img/icon-fortunewheel.png",
+        icon: "/img/fortunewheel.svg",
         styles:{
             color:"color-card-offer",
             background:"bg-card-offer",

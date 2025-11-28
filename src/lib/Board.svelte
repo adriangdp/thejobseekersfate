@@ -105,13 +105,13 @@
             <table class="lg:mx-auto lg:w-full">
                 <thead class="bg-accent-inner">
                     <tr>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Status</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Position</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Company</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Mode</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Salary</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Link</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-md">Added Date</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Status</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Position</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Company</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Mode</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Salary</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Link</th>
+                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Added Date</th>
                     </tr>
                 </thead>
                 <tbody>                

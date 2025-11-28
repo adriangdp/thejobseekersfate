@@ -24,15 +24,15 @@
             <div class="flex flex-col mt-5 md:mt-10 lg:mt-5 gap-1 md:gap-4 lg:gap-3">
                 <div>
                     <img src="/img/icon-building.png" alt="work mode icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-md">{mode}</span>
+                    <span class="text-text-darker text-sm md:text-base">{mode}</span>
                 </div>
                 <div>
                     <img src="/img/icon-coin.png" alt="salary icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-md">{salary}</span>
+                    <span class="text-text-darker text-sm md:text-base">{salary}</span>
                 </div>
                 <div>
                     <img src="/img/icon-calendar.png" alt="added date icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-md">{String(appliedDate.getDate()).padStart(2,'0')}/{appliedDate.getMonth()}/{appliedDate.getFullYear()}</span>
+                    <span class="text-text-darker text-sm md:text-base">{String(appliedDate.getDate()).padStart(2,'0')}/{appliedDate.getMonth()}/{appliedDate.getFullYear()}</span>
                 </div>                
             </div>
     
@@ -44,17 +44,17 @@
     </button>
 {:else}
     <tr>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40"><BadgeStatus state={status} /></td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{position}</td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{company}</td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{mode}</td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{salary}</td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40"><a href={link}> Offer site </a></td>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-md text-center min-w-40">{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40"><BadgeStatus state={status} /></td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{position}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{company}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{mode}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{salary}</td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40"><a href={link}> Offer site </a></td>
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{String(appliedDate.getDate()).padStart(2,'0')} {appliedDate.toLocaleString('default', { month: 'long' })} {appliedDate.getFullYear()}</td>
     </tr>
 {/if}
 {#if showDetail}
-    <JobDetail jobApplication={application} isOpen={showDetail}></JobDetail>
+    <JobDetail jobApplication={application} bind:isOpen={showDetail}></JobDetail>
 {/if}
 
 

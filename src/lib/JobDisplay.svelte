@@ -11,28 +11,28 @@
 
 {#if isCardDisplay}
     <button onclick={()=>showDetail = true}
-        class="relative w-full aspect-2/4 md:aspect-2/3 px-3 py-8 bg-accent-inner border-accent-outer border bg-radial from-white/0 to-white/0 overflow-hidden">        
-        <div class="relative mx-auto h-1/2 flex flex-col md:justify-end">
-            <img src={status.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-13 md:w-28 lg:w-43"/>
-            <strong class="flex items-center justify-center md:text-xl grow text-center">{status.figureName}</strong>
+        class="relative w-full aspect-2/4 md:aspect-2/3 px-5 py-4 bg-accent-inner border-accent-outer border bg-radial from-white/0 to-white/0 overflow-hidden">        
+        <div class="relative mx-auto h-1/3 md:h-1/3 flex flex-col md:justify-end">
+            <img src={status.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
+            <strong class="flex items-center justify-center md:text-xl grow text-center">&#149;  {status.figureName}  &#149;</strong>
         </div>
-        <div class="z-20 relative mt-3 md:mt-8 lg:mt-3">
+        <div class="z-20 relative mt-6 md:mt-4 lg:mt-4">
             <div class="flex flex-col gap-1 md:gap-2 items-center">
                 <span>{company}</span>
                 <span class="text-text-darker">{position}</span>
             </div>
-            <div class="flex flex-col mt-5 md:mt-10 lg:mt-5 gap-1 md:gap-4 lg:gap-3">
+            <div class="flex flex-col items-start mt-5 md:mt-8 lg:mt-5 gap-1 md:gap-4 lg:gap-3">
                 <div>
-                    <img src="/img/icon-building.png" alt="work mode icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-base">{mode}</span>
+                    <img src="/img/icon-building.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
+                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{mode}</span>
                 </div>
                 <div>
-                    <img src="/img/icon-coin.png" alt="salary icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-base">{salary}</span>
+                    <img src="/img/icon-coin.png" alt="salary icon"  class="w-8 md:w-9 inline" />
+                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{salary}</span>
                 </div>
                 <div>
-                    <img src="/img/icon-calendar.png" alt="added date icon"  class="w-5 md:w-7 inline" />
-                    <span class="text-text-darker text-sm md:text-base">{String(appliedDate.getDate()).padStart(2,'0')}/{appliedDate.getMonth()}/{appliedDate.getFullYear()}</span>
+                    <img src="/img/icon-calendar.png" alt="added date icon"  class="w-8 md:w-9 inline" />
+                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{String(appliedDate.getDate()).padStart(2,'0')}/{appliedDate.getMonth()}/{appliedDate.getFullYear()}</span>
                 </div>                
             </div>
     

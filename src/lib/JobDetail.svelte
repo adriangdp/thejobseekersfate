@@ -13,7 +13,7 @@
             <img src={status.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
             <div>
                 <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">{company}</span>
-                <span class="block font-rosarivo text-text-darker text-center text-wrap text-lg md:text-2xl lg:text-xl">•  {status.figureName}  •</span>
+                <span class="block font-rosarivo text-text-darker text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {status.figureName}  &#149;</span>
             </div>
         </div>
         <div class="mt-12 flex flex-col gap-5 md:gap-6">

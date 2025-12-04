@@ -20,7 +20,7 @@
 
 @layer base{
 
-  html{
+  html, dialog{
     background-color: var(--color-background);
     color: var(--color-text-body);  
   }

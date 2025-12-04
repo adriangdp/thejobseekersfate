@@ -27,7 +27,7 @@
 </script>
 
 <div class="my-5">
-    <ul class="flex flex-wrap gap-4 justify-center">
+    <ul class="flex flex-wrap justify-center gap-4">
         <li>
             <button onclick={()=>showOffer = !showOffer}
                 class={`${showOffer? '':'bg-background'}`}

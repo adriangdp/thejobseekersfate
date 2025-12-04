@@ -8,6 +8,7 @@
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
+    import ClearDataButton from "@lib/ClearDataButton.svelte";
     
     let isCardDisplay: boolean = $state(true)
     let showAddApplicationModal:boolean = $state(false)
@@ -74,13 +75,16 @@
     w-full`
 }>
     <div class="max-w-full flex flex-wrap gap-2 justify-between">
-        <SwitchView bind:isCardDisplay/>
-        <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
-             class="flex gap-3"
-        > 
-            <img  src="/img/icon-add.png" alt="add job application button icon" width="24px" height="24px" class="brightness-200"/>
-            <span>Add Job Application</span>
-        </button>
+        <div class="flex flex-wrap gap-2 justify-between">
+            <SwitchView bind:isCardDisplay/>
+            <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
+                    class="flex gap-3"
+            > 
+                <img  src="/img/icon-add.png" alt="add job application button icon" width="24px" height="24px" class="brightness-200"/>
+                <span>Add Job Application</span>
+            </button>
+        </div>
+        <ClearDataButton />
     </div>
     <BoardFilter 
         bind:showRejected 
@@ -131,7 +135,5 @@
     </Modal>
 
     {/if}
-
-    <button onclick={clearTable}> Clear data</button>
 </div>
 

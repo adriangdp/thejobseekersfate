@@ -5,25 +5,26 @@
 
     const handleunFold = async():Promise<void> =>{
         isFolded = false;
-        setTimeout(()=>{isFolded = true}, 60 * 1000)
+        setTimeout(()=>{isFolded = true}, 10 * 1000)
     }
 
 </script>
 
 <div class="relative w-fit bg-background border border-accent-outer overflow-hidden">
-    <div  class="flex p-2 gap-3 w-full h-full bg-card-rejected/10 ">
-            <span>Are you sure?</span>
-            <button onclick={()=>clearTable} class="button-invisible p-0 hover:text-card-rejected">YES</button>
-            <span>&nbsp;</span>
-            <button onclick={()=>isFolded = true} class="button-invisible p-0 hover:text-card-applied">NO</button>  
-    </div> 
-    <button class={`fold ${isFolded? '':'unfold'} flex items-center justify-center gap-2`} onclick={handleunFold}>
+     <button class={`fold ${isFolded? '':'unfold'} flex items-center justify-center gap-2`} onclick={handleunFold}>
         <img src="/img/icon-delete.png"
                 alt="Delete database button icon"
                 width="20px" height="20px" 
         />
         <span>Clear data</span>
     </button>
+    <div  class="flex p-2 gap-3 w-full h-full bg-card-rejected/10 ">
+            <span>Are you sure?</span>
+            <button onclick={()=>clearTable} class="button-invisible p-0 hover:text-card-rejected" disabled={isFolded}>YES</button>
+            <span>&nbsp;</span>
+            <button onclick={()=>isFolded = true} class="button-invisible p-0 hover:text-card-applied" disabled={isFolded}>NO</button>  
+    </div> 
+   
 </div>
 
 

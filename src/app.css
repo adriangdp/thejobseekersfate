@@ -22,10 +22,10 @@
 
   html{
     background-color: var(--color-background);
-    color: var(--color-text-body);   
+    color: var(--color-text-body);  
   }
 
-  h1,h2,h3,h4,h5,h6,q,strong{
+  h1,h2,h3,h4,h5,h6,q,strong,label{
     font-family: var(--font-rosarivo);
     letter-spacing: 0.05em;
   }
@@ -35,10 +35,7 @@
     font-weight: 500;
     letter-spacing: 0.15em;
   }
-  
-}
 
-@layer components{
   button, input, select{
     @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm
   }
@@ -46,6 +43,11 @@
   a{
     @apply text-card-accepted decoration-card-accepted underline underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-interview visited:decoration-card-interview
   }
+  
+}
+
+@layer components{
+
 
   .button-invisible{
     @apply border-0 bg-transparent p-2 rounded-none

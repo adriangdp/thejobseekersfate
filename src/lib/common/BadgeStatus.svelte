@@ -9,6 +9,6 @@
 
 </script>
 
-<div class={`inline-flex items-center justify-center px-2 py-1 w-fit rounded-full border-2 brightness-100 ${border} ${background}`}>
+<div class={`inline-flex items-center justify-center p-1 lg:px-2 lg:py-1 w-fit rounded-full border-2 ${border} ${background}`}>
     <p class={`${text} text-sm`}>{state.situation}</p>
 </div>

@@ -3,6 +3,11 @@
 
     let isFolded:boolean = $state(true)
 
+    const handleunFold = async():Promise<void> =>{
+        isFolded = false;
+        setTimeout(()=>{isFolded = true}, 60 * 1000)
+    }
+
 </script>
 
 <div class="relative w-fit bg-background border border-accent-outer overflow-hidden">
@@ -12,7 +17,7 @@
             <span>&nbsp;</span>
             <button onclick={()=>isFolded = true} class="button-invisible p-0 hover:text-card-applied">NO</button>  
     </div> 
-    <button class={`fold ${isFolded? '':'unfold'} flex items-center justify-center gap-2`} onclick={()=>{isFolded = false}}>
+    <button class={`fold ${isFolded? '':'unfold'} flex items-center justify-center gap-2`} onclick={handleunFold}>
         <img src="/img/icon-delete.png"
                 alt="Delete database button icon"
                 width="20px" height="20px" 

@@ -71,8 +71,7 @@
     )
 </script>
 
-<div class={`${preventScroll ? 'h-screen overflow-hidden':''} 
-    w-full`
+<div class={`${preventScroll ? 'max-h-screen overflow-hidden':''} w-full pt-4`
 }>
     <div class="max-w-full flex flex-wrap gap-2 justify-between">
         <div class="flex flex-wrap gap-2 justify-between">

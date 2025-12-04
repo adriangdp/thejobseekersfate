@@ -30,37 +30,37 @@
 
 </script>
 
-        <form onsubmit={handleNewApplication}>
-            <div class="flex items-center gap-1 m-5">
+        <form onsubmit={handleNewApplication} class="flex flex-col gap-8 h-fit">
+            <div class="flex flex-col items-center gap-2 xl:gap-4">
                 <div>
                     <label for="input-status">Status</label>
-                    <div class="flex justify-center items-center gap-2 mt-3">
+                    <div class="flex flex-wrap items-center gap-2 xl:gap-5 mt-3">
                         {#each Object.entries(JobStates) as [key,option]}
-                            <button type="button" class={`button-invisible cursor-pointer ${key === selectedStatus? 'opacity-100':'opacity-40'}`}  onclick={()=>selectedStatus = key}>
+                            <button type="button" class={`button-invisible cursor-pointer ${key === selectedStatus? 'brightness-250':''} p-0`}  onclick={()=>selectedStatus = key}>
                                 <BadgeStatus state={option}></BadgeStatus>
                             </button>                                  
                         {/each}
                     </div>
                 </div>
-                <div>
-                    <label for="input-position">Position</label>
-                    <input name="position" id="input-position" type="text"/>
+                <div class="w-full">
+                    <label for="input-position" class="block">Position</label>
+                    <input name="position" id="input-position" type="text" class="w-full" />
                 </div>
-                <div>
+                <div class="w-full">
                     <label for="input-company">Company</label>
-                    <input name="company" id="input-company" type="text"/>
+                    <input name="company" id="input-company" type="text" class="w-full"/>
                 </div>                
-                <div>
+                <div class="w-full">
                     <label for="input-mode">Mode</label>
-                    <input name="mode" id="input-mode" type="text"/>
+                    <input name="mode" id="input-mode" type="text" class="w-full"/>
                 </div>
-                <div>
+                <div class="w-full">
                     <label for="input-salary">Salary</label>
-                    <input name="salary" id="input-salary" type="number"/>
+                    <input name="salary" id="input-salary" type="number" class="w-full"/>
                 </div>
-                <div>
+                <div class="w-full">
                     <label for="input-link">Link</label>
-                    <input name="link" id="input-link" type="url"/>
+                    <input name="link" id="input-link" type="url" class="w-full"/>
                 </div>
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>

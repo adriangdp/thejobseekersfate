@@ -6,9 +6,9 @@
     let{state, id} : { state: JobState, id:number} = $props();
 
 
-    const handleStateChange =(jobstate:string)=>{
+    const handleStateChange =async(jobstate:string)=>{
         console.log(jobstate)
-        db.jobData.where("id").equals(id).modify({statusKey:jobstate})
+        await db.jobData.where("id").equals(id).modify({statusKey:jobstate})
     }
 </script>
 

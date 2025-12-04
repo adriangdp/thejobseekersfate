@@ -2,6 +2,7 @@
     import { type JobApplication, type JobState } from "@data/types";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
+    import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
     let  { isOpen = $bindable(), jobApplication } : {jobApplication: JobApplication, isOpen: boolean} = $props()
     let { id, status, position, company, salary, mode, link, appliedDate} = $derived(jobApplication)
@@ -49,5 +50,6 @@
                     <a href={link} class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">Link to offer</a>
                 </div>     
         </div>
+        <DeleteJobApplication id={id} />
     </div>
 </Modal>

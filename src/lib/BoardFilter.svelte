@@ -30,7 +30,7 @@
     <ul class="flex flex-wrap justify-center gap-4">
         <li>
             <button onclick={()=>showOffer = !showOffer}
-                class={`${showOffer? '':'bg-background'}`}
+                class={`${showOffer? '':'bg-background'} ${showOffer? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.offer.icon} 
                     alt={`Filter by ${JobStates.offer.situation} icon`}
@@ -41,7 +41,7 @@
         </li>
         <li>
             <button onclick={()=>showApplied = !showApplied}
-                class={`${showApplied? '':'bg-background'}`}
+                class={`${showApplied? '':'bg-background'} ${showApplied? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.applied.icon} 
                     alt={`Filter by ${JobStates.applied.situation} icon`}
@@ -52,7 +52,7 @@
         </li>
         <li>
             <button onclick={()=>showInterview = !showInterview}
-                class={`${showInterview? '':'bg-background'}`}
+                class={`${showInterview? '':'bg-background'} ${showInterview? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.interview.icon} 
                     alt={`Filter by ${JobStates.interview.situation} icon`}
@@ -63,7 +63,7 @@
         </li>
         <li>
             <button onclick={()=>showRejected = !showRejected}
-                class={`${showRejected? '':'bg-background'}`}
+                class={`${showRejected? '':'bg-background'} ${showRejected? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.rejected.icon} 
                     alt={`Filter by ${JobStates.rejected.situation} icon`}
@@ -74,7 +74,7 @@
         </li>
         <li>
             <button onclick={()=>showGhosted = !showGhosted}
-                class={`${showGhosted? '':'bg-background'}`}
+                class={`${showGhosted? '':'bg-background'} ${showGhosted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.ghosted.icon} 
                     alt={`Filter by ${JobStates.ghosted.situation} icon`}
@@ -85,7 +85,7 @@
         </li>       
         <li>
             <button onclick={()=>showAccepted = !showAccepted}
-                class={`${showAccepted? '':'bg-background'}`}
+                class={`${showAccepted? '':'bg-background'} ${showAccepted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStates.accepted.icon} 
                     alt={`Filter by ${JobStates.accepted.situation} icon`}

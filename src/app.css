@@ -50,7 +50,7 @@
 
 
   .button-invisible{
-    @apply border-0 bg-transparent p-2 rounded-none
+    @apply border-0 bg-transparent p-2 rounded-none cursor-pointer
   }
 
 }

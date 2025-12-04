@@ -1,10 +1,13 @@
 <script lang="ts">
     import { type JobApplication, type JobState } from "@data/types";
+    import BadgeStatus from "@lib/common/BadgeStatus.svelte";
+    import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import Modal from "@lib/Modal.svelte";
     let  { isOpen = $bindable(), jobApplication } : {jobApplication: JobApplication, isOpen: boolean} = $props()
-    let { status, position, company, salary, mode, link, appliedDate} = $derived(jobApplication)
+    let { id, status, position, company, salary, mode, link, appliedDate} = $derived(jobApplication)
+    let editStatus:boolean = $state(false);
 
-    console.log(`Bindable: ${isOpen}`)
+
 </script>
 
 <Modal bind:isOpen>
@@ -17,6 +20,14 @@
             </div>
         </div>
         <div class="mt-12 flex flex-col gap-5 md:gap-6">
+                <div>
+                    <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatus = !editStatus}}>
+                        <BadgeStatus state={status} />   
+                        {#if editStatus}
+                            <BadgeStatusChanger id={id} state={status}></BadgeStatusChanger>
+                        {/if}
+                    </button>
+                </div>                
                 <div>
                     <img src="/img/icon-building.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
                     <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{position}</span>

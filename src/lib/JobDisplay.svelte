@@ -5,7 +5,7 @@
 
     let showDetail: boolean = $state(false)
     let { application, isCardDisplay } : {application:JobApplication, isCardDisplay:boolean}  = $props();
-    let {status,position,company,mode,salary,link,appliedDate} = $derived(application)
+    let {id, status,position,company,mode,salary,link,appliedDate} = $derived(application)
 
 </script>
 

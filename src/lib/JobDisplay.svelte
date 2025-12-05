@@ -5,7 +5,7 @@
 
     let showDetail: boolean = $state(false)
     let { application, isCardDisplay } : {application:JobApplication, isCardDisplay:boolean}  = $props();
-    let {id, status,position,company,mode,salary,link,appliedDate} = $derived(application)
+    let {id, status,position,company,mode,salary,link,appliedDate} = $derived(application);
 
 </script>
 
@@ -43,8 +43,10 @@
    
     </button>
 {:else}
-    <tr>
-        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40"><BadgeStatus state={status} /></td>
+    <tr onclick={()=>showDetail = true} class="cursor-pointer">
+        <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">
+            <BadgeStatus state={status} />
+        </td>
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{position}</td>
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{company}</td>
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{mode}</td>

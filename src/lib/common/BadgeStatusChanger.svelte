@@ -7,7 +7,6 @@
 
 
     const handleStateChange =async(jobstate:string)=>{
-        console.log(jobstate)
         await db.jobData.where("id").equals(id).modify({statusKey:jobstate})
     }
 </script>

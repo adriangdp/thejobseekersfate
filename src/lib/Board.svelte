@@ -65,7 +65,6 @@
                     default: return a.id-b.id
                 }
             })
-            console.log(filteredArray)
             return filteredArray
         }
     )

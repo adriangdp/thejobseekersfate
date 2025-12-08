@@ -62,6 +62,9 @@
 }
 
 @layer base{
+  *:focus{
+    @apply outline-none ring-2 ring-card-accepted
+  }
 
   html, dialog{
     background-color: var(--color-background);
@@ -80,11 +83,11 @@
   }
 
   button, input, select{
-    @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm
+    @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm 
   }
 
   a{
-    @apply text-card-accepted decoration-card-accepted underline underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-interview visited:decoration-card-interview
+    @apply text-card-accepted decoration-card-accepted underline decoration-dotted underline-offset-7 lg:underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-accepted visited:decoration-card-accepted
   }
   
 }

@@ -23,7 +23,7 @@
             form.reset()
             showAddApplicationModal = false
         } catch(error){
-            console.log(error)
+            console.log("Form error.")
         }
         
     }

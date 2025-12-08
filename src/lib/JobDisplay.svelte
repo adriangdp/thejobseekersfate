@@ -28,7 +28,7 @@
                 </div>
                 <div>
                     <img src="/img/icon-coin.png" alt="salary icon"  class="w-6 md:w-9 inline" />
-                    <span class="ml-2 md:ml-3 text-text-darker text-xs md:text-base">{salary}</span>
+                    <span class="ml-2 md:ml-3 text-text-darker text-xs md:text-base">{new Intl.NumberFormat().format(salary)}</span>
                 </div>
                 <div>
                     <img src="/img/icon-calendar.png" alt="added date icon"  class="w-5 md:w-9 inline" />

@@ -36,7 +36,7 @@
                     alt={`Filter by ${JobStates.offer.situation} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.applied.situation}</span>
+                <span class="text-sm">{JobStates.offer.situation}</span>
             </button>
         </li>
         <li>

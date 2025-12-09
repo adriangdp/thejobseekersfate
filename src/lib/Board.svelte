@@ -19,6 +19,7 @@
     let showOffer: boolean = $state(true)
     let showAccepted: boolean = $state(true)
     let showGhosted: boolean = $state(true)
+    let isAllFiltersOff: boolean = $derived(!showRejected && !showApplied && !showInterview && !showOffer && !showAccepted && !showGhosted)
 
     let preventScroll: boolean = $derived(showAddApplicationModal)
 
@@ -95,7 +96,7 @@
         bind:isAscendent
     >
     </BoardFilter>
-    {#if filteredApplications}
+    {#if filteredApplications.length > 0}
         {#if isCardDisplay}
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
                 {#each filteredApplications as cardApplication}
@@ -126,6 +127,19 @@
         </div>
 
         {/if}
+        {:else if jobData.length <= 0}
+            <span class="block my-8 text-center text-text-darker text-2xl font-rosarivo"> 
+                Approach, oh fretting soul, and add a 
+                <button onclick={()=>{showAddApplicationModal = true}}
+                    class="button-invisible p-0 text-card-accepted decoration-card-accepted underline decoration-dotted underline-offset-7 lg:underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-accepted visited:decoration-card-accepted"
+                >
+                Job Application
+                </button> to recieve a reading.
+            </span>
+        {:else if isAllFiltersOff}
+            <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> No readings can be offered with all filters turned off.</span>
+        {:else}
+            <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> The stars do not align. Something unsettling is afoot.</span>
     {/if}
     {#if showAddApplicationModal}
     <Modal bind:isOpen={showAddApplicationModal}>

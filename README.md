@@ -92,10 +92,13 @@ npm run preview
 ```
 
 ## Known limitations and TODOs
-* Right now, updating job applications is limited to status; but would be nice to be able to edit all fields.
 * Zod validates forms correctly, but handling errors gracefully is not yet implemented.
+* More form validation flexibility: defaults, optionals...
+* Improve accesibility and aria attributes.
+* Add application form needs to take into account a salary range or unkown salary.
+* Possibility of adding notes.
+* Right now, updating job applications is limited to status; but would be nice to be able to edit all fields.
 * Component and integration tests.
 * Job Application statistics: compile and show an history of job application and status, salary trends, etc.
-* Improve accesibility and aria attributes.
 * Add some details and decorations to certain aspects.
 * Another color theme.

@@ -10,7 +10,7 @@
     let position:string = $state("");
     let company:string = $state("");
     let mode:string = $state("");
-    let salary:number = $state(0);
+    let salary:number|null = $state(null);
     let link:string = $state("");
 
     const handleNewApplication = async() =>{
@@ -27,20 +27,20 @@
         }
 
         try{
-            const parseData = applicationSchema.parse(formData)
-            const id = await db.jobData.add(parseData)
+            const parseData = applicationSchema.parse(formData);
+            const id = await db.jobData.add(parseData);
             
             statusKey="offer"
             position=""
             company=""
             mode=""
-            salary=0
+            salary=null
             link=""
 
             showAddApplicationModal = false
         } catch(error){
-            console.log("Form error.")
-            console.log(error)
+            console.log("Form error.");
+            console.log(error);
         }
         
     }

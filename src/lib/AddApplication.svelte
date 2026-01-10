@@ -1,29 +1,46 @@
 <script lang="ts">
-    import { db } from "@data/db"
-    import { JobStates } from "@data/jobStates"
-    import { applicationSchema } from "@data/validation-schemas"
+    import { db } from "@data/db";
+    import { JobStates } from "@data/jobStates";
+    import { applicationSchema } from "@data/validation-schemas";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
 
     let{ showAddApplicationModal = $bindable() } : {showAddApplicationModal : boolean}= $props()
   
-    let selectedStatus:string = $state("offer")
+    let statusKey:string = $state("offer");
+    let position:string = $state("");
+    let company:string = $state("");
+    let mode:string = $state("");
+    let salary:number = $state(0);
+    let link:string = $state("");
 
-    const handleNewApplication = async(event:SubmitEvent) =>{
-        event.preventDefault()
-        const form = event.target as HTMLFormElement
-        const formData = new FormData(form)
-        formData.set('statusKey', selectedStatus)
-        formData.set('appliedDate', new Date().toISOString())
+    const handleNewApplication = async() =>{
+     
+        const date = new Date().toISOString();
+        const formData = {
+            statusKey,
+            position,
+            company,
+            mode,
+            salary,
+            link,
+            appliedDate: date
+        }
 
         try{
-            const data = Object.fromEntries(formData.entries())
-            const parseData = applicationSchema.parse(data)
+            const parseData = applicationSchema.parse(formData)
             const id = await db.jobData.add(parseData)
             
-            form.reset()
+            statusKey="offer"
+            position=""
+            company=""
+            mode=""
+            salary=0
+            link=""
+
             showAddApplicationModal = false
         } catch(error){
             console.log("Form error.")
+            console.log(error)
         }
         
     }
@@ -36,7 +53,7 @@
                     <label for="input-status">Status</label>
                     <div class="flex flex-wrap items-center gap-2 xl:gap-5 mt-3">
                         {#each Object.entries(JobStates) as [key,option]}
-                            <button type="button" class={`button-invisible cursor-pointer ${key === selectedStatus? 'brightness-250':''} p-0`}  onclick={()=>selectedStatus = key}>
+                            <button type="button" class={`button-invisible cursor-pointer ${key === statusKey? 'brightness-250':''} p-0`}  onclick={()=>statusKey = key}>
                                 <BadgeStatus state={option}></BadgeStatus>
                             </button>                                  
                         {/each}
@@ -44,23 +61,23 @@
                 </div>
                 <div class="w-full">
                     <label for="input-position" class="block">Position</label>
-                    <input name="position" id="input-position" type="text" class="w-full" />
+                    <input bind:value={position} name="position" id="input-position" type="text" class="w-full" />
                 </div>
                 <div class="w-full">
                     <label for="input-company">Company</label>
-                    <input name="company" id="input-company" type="text" class="w-full"/>
+                    <input bind:value={company} name="company" id="input-company" type="text" class="w-full"/>
                 </div>                
                 <div class="w-full">
                     <label for="input-mode">Mode</label>
-                    <input name="mode" id="input-mode" type="text" class="w-full"/>
+                    <input bind:value={mode} name="mode" id="input-mode" type="text" class="w-full"/>
                 </div>
                 <div class="w-full">
                     <label for="input-salary">Salary</label>
-                    <input name="salary" id="input-salary" type="number" class="w-full"/>
+                    <input bind:value={salary} name="salary" id="input-salary" type="number" class="w-full"/>
                 </div>
                 <div class="w-full">
                     <label for="input-link">Link</label>
-                    <input name="link" id="input-link" type="url" class="w-full"/>
+                    <input bind:value={link} name="link" id="input-link" type="url" class="w-full"/>
                 </div>
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>

@@ -7,7 +7,7 @@ export type JobApplication = {
     position:string,
     company:string,
     mode?:string,
-    salary?:number,
+    salary:string,
     link:string,
     appliedDate:Date,
 }
@@ -18,7 +18,7 @@ export type JobData = {
     position:string,
     company:string,
     mode?:string,
-    salary?:number,
+    salary?:string,
     link:string,
     appliedDate:Date,
 }

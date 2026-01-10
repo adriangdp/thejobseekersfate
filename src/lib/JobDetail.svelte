@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     <img src="/img/icon-coin.png" alt="salary icon"  class="w-8 md:w-9 inline" />
-                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{new Intl.NumberFormat().format(salary)} €</span>
+                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{salary === "unknown" ? "unknown": Number(salary).toLocaleString('es-ES')+" €"} </span>
                 </div>
                 <div>
                     <img src="/img/icon-calendar.png" alt="added date icon"  class="w-8 md:w-9 inline" />

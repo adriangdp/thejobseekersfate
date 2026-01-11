@@ -13,9 +13,9 @@
     let salary:number|null = $state(null);
     let link:string = $state("");
 
-    const handleNewApplication = async() =>{
-     
-        const date = new Date().toISOString();
+    const handleNewApplication = async(e:Event) =>{
+        e.preventDefault();
+        const date = new Date();
         const formData = {
             statusKey,
             position,

@@ -9,5 +9,5 @@ export const applicationSchema = z.object({
     mode: z.string().default("unknown"),
     salary: z.number().positive().transform(String).nullable().transform(val=>val?? "unknown"),
     link: z.url("Need a valid url for the website were the application was made"),
-    appliedDate: z.coerce.date()
+    appliedDate: z.date()
 })

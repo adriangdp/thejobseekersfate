@@ -8,6 +8,11 @@
         setTimeout(()=>{isFolded = true}, 10 * 1000)
     }
 
+    const handleClearTable = () =>{
+        clearTable();
+        isFolded = true;
+    }
+
 </script>
 
 <div class="relative w-fit bg-background border border-accent-outer overflow-hidden">
@@ -20,7 +25,7 @@
     </button>
     <div  class="flex p-2 gap-3 w-full h-full bg-card-rejected/10 ">
             <span>Are you sure?</span>
-            <button onclick={clearTable} class="button-invisible p-0 hover:text-card-rejected" disabled={isFolded}>YES</button>
+            <button onclick={handleClearTable} class="button-invisible p-0 hover:text-card-rejected" disabled={isFolded}>YES</button>
             <span>&nbsp;</span>
             <button onclick={()=>isFolded = true} class="button-invisible p-0 hover:text-card-applied" disabled={isFolded}>NO</button>  
     </div> 

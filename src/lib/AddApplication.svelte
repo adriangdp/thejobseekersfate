@@ -75,6 +75,7 @@
                         name="position" 
                         id="input-position" 
                         type="text" 
+                        placeholder="Position / Job Title"
                         class="w-full" 
                     />
                 </div>
@@ -84,25 +85,28 @@
                         name="company"
                         id="input-company" 
                         type="text" 
+                        placeholder="Company / Job Poster"
                         class="w-full"
                     />
                 </div>                
                 <div class="w-full">
-                    <label for="input-mode">Mode</label>
+                    <label for="input-mode">Mode (optional)</label>
                     <input bind:value={mode} 
                         name="mode" 
                         id="input-mode" 
                         type="text" 
+                        placeholder="Office / Remote / Hybrid / Other"
                         class="w-full"
                     />
                 </div>
                 <div class="w-full">
-                    <label for="input-salary">Salary</label>
+                    <label for="input-salary">Salary (optional)</label>
                     <input bind:value={salary} 
                         name="salary" 
                         id="input-salary" 
-                        type="number" 
-                        class="w-full"
+                        type="number"
+                        placeholder="Annual salary" 
+                        class="w-full"                        
                     />
                 </div>
                 <div class="w-full">
@@ -111,6 +115,7 @@
                         name="link" 
                         id="input-link" 
                         type="url" 
+                        placeholder="Link to job posting"
                         class="w-full"
                     />
                 </div>

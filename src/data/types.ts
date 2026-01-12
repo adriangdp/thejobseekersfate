@@ -1,6 +1,5 @@
 export type ReadOnlyDictionary<T> = {readonly [key:string]:T}
 
-
 export type JobApplication = {
     id:number,
     status:JobState,
@@ -39,3 +38,4 @@ export type JobState ={
         }
     },
 }
+

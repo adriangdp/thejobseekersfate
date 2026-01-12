@@ -6,16 +6,15 @@
 
     let{ showAddApplicationModal = $bindable() } : {showAddApplicationModal : boolean}= $props()
   
-    let statusKey:string = $state("offer");
-    let position:string = $state("");
-    let company:string = $state("");
-    let mode:string = $state("");
-    let salary:number|null = $state(null);
-    let link:string = $state("");
-    let appliedDate:string = $state(new Date().toISOString().split("T")[0]);
+    let statusKey: string = $state("offer");
+    let position: string|undefined = $state();
+    let company: string|undefined = $state();
+    let mode: string = $state("");
+    let salary: number|null = $state(null);
+    let link: string = $state("");
+    let appliedDate: string = $state(new Date().toISOString().split("T")[0]);
 
-
-
+    let formErrors:Record<string, string> = $state({});
 
     const handleNewApplication = async(e:Event) =>{
         e.preventDefault();
@@ -28,23 +27,33 @@
             link,
             appliedDate: new Date(appliedDate)
         }
+            const parseData = applicationSchema.safeParse(formData);
 
-        try{
-            const parseData = applicationSchema.parse(formData);
-            const id = await db.jobData.add(parseData);
+            if(parseData.success){
+                const id = await db.jobData.add(parseData.data);
             
-            statusKey="offer"
-            position=""
-            company=""
-            mode=""
-            salary=null
-            link=""
+                statusKey="offer"
+                position=""
+                company=""
+                mode=""
+                salary=null
+                link=""
 
-            showAddApplicationModal = false
-        } catch(error){
-            console.log("Form error.");
-            console.log(error);
-        }
+                showAddApplicationModal = false
+            }
+            else{
+               const errors = parseData.error.issues;
+                errors.forEach((err)=>{
+                    const error = err.path[0] as string;
+                    if(error && !formErrors[error]){
+                        formErrors[error] = err.message;
+                    }
+                })
+               
+            }
+            
+            
+       
         
     }
 
@@ -70,7 +79,12 @@
                     </div>
                 </div>
                 <div class="w-full">
-                    <label for="input-position" class="block">Position</label>
+                    <label for="input-position" class="block">
+                        Position
+                        {#if formErrors.position}
+                            <span class="text-card-rejected text-sm animate-falldown">{formErrors.position}</span>
+                        {/if}
+                    </label>
                     <input bind:value={position}
                         name="position" 
                         id="input-position" 
@@ -80,7 +94,12 @@
                     />
                 </div>
                 <div class="w-full">
-                    <label for="input-company">Company</label>
+                    <label for="input-company">
+                        Company
+                        {#if formErrors.company}
+                            <span class="text-card-rejected text-sm animate-falldown">{formErrors.company}</span>
+                        {/if}
+                    </label>
                     <input bind:value={company} 
                         name="company"
                         id="input-company" 
@@ -110,7 +129,12 @@
                     />
                 </div>
                 <div class="w-full">
-                    <label for="input-link">Link</label>
+                    <label for="input-link">
+                        Link
+                        {#if formErrors.link}
+                            <span class="text-card-rejected text-sm animate-falldown">{formErrors.link}</span>
+                        {/if}
+                    </label>
                     <input bind:value={link} 
                         name="link" 
                         id="input-link" 

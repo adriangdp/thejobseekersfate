@@ -4,9 +4,10 @@
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
+
     let  { isOpen = $bindable(), jobApplication } : {jobApplication: JobApplication, isOpen: boolean} = $props()
     let { id, status, position, company, salary, mode, link, appliedDate} = $derived(jobApplication)
-    let editStatus:boolean = $state(false);
+    let editStatusFlag:boolean = $state(false);
 
 
 </script>
@@ -22,9 +23,9 @@
         </div>
         <div class="mt-12 flex flex-col gap-5 md:gap-6">
                 <div>
-                    <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatus = !editStatus}}>
+                    <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatusFlag = !editStatusFlag}}>
                         <BadgeStatus state={status} />   
-                        {#if editStatus}
+                        {#if editStatusFlag}
                             <BadgeStatusChanger id={id} state={status}></BadgeStatusChanger>
                         {/if}
                     </button>
@@ -50,6 +51,10 @@
                     <a href={link} class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">Link to offer</a>
                 </div>     
         </div>
-        <DeleteJobApplication id={id} />
+        <div class="mt-12 w-full flex justify-between items-center">
+            <button class="w-10/12"> Edit </button>
+            <DeleteJobApplication id={id} />
+        </div>
+
     </div>
 </Modal>

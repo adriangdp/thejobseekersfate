@@ -13,7 +13,7 @@
 
 
 
-<div class="z-20 absolute top-[110%] left-0 w-fit h-fit p-3 bg-background border border-accent-outer flex flex-wrap gap-2">
+<div class="z-20 absolute top-[110%] left-0 w-fit h-fit p-3 bg-background border border-accent-outer flex flex-wrap gap-2 animate-revealcard duration-300">
    
     {#each Object.entries(JobStates) as [key,option]}
         {#if option.situation !== state.situation}

@@ -12,10 +12,13 @@
     let mode:string = $state("");
     let salary:number|null = $state(null);
     let link:string = $state("");
+    let appliedDate:string = $state(new Date().toISOString().split("T")[0]);
+
+
+
 
     const handleNewApplication = async(e:Event) =>{
         e.preventDefault();
-        const date = new Date();
         const formData = {
             statusKey,
             position,
@@ -23,7 +26,7 @@
             mode,
             salary,
             link,
-            appliedDate: date
+            appliedDate: new Date(appliedDate)
         }
 
         try{
@@ -53,7 +56,14 @@
                     <label for="input-status">Status</label>
                     <div class="flex flex-wrap items-center gap-2 xl:gap-5 mt-3">
                         {#each Object.entries(JobStates) as [key,option]}
-                            <button type="button" class={`button-invisible cursor-pointer ${key === statusKey? 'brightness-250':''} p-0`}  onclick={()=>statusKey = key}>
+                            <button onclick={()=>statusKey = key}
+                                type="button" 
+                                class={`button-invisible cursor-pointer 
+                                    ${key === statusKey? 
+                                        'brightness-250':''
+                                    } p-0`
+                                }
+                            >
                                 <BadgeStatus state={option}></BadgeStatus>
                             </button>                                  
                         {/each}
@@ -61,26 +71,65 @@
                 </div>
                 <div class="w-full">
                     <label for="input-position" class="block">Position</label>
-                    <input bind:value={position} name="position" id="input-position" type="text" class="w-full" />
+                    <input bind:value={position}
+                        name="position" 
+                        id="input-position" 
+                        type="text" 
+                        class="w-full" 
+                    />
                 </div>
                 <div class="w-full">
                     <label for="input-company">Company</label>
-                    <input bind:value={company} name="company" id="input-company" type="text" class="w-full"/>
+                    <input bind:value={company} 
+                        name="company"
+                        id="input-company" 
+                        type="text" 
+                        class="w-full"
+                    />
                 </div>                
                 <div class="w-full">
                     <label for="input-mode">Mode</label>
-                    <input bind:value={mode} name="mode" id="input-mode" type="text" class="w-full"/>
+                    <input bind:value={mode} 
+                        name="mode" 
+                        id="input-mode" 
+                        type="text" 
+                        class="w-full"
+                    />
                 </div>
                 <div class="w-full">
                     <label for="input-salary">Salary</label>
-                    <input bind:value={salary} name="salary" id="input-salary" type="number" class="w-full"/>
+                    <input bind:value={salary} 
+                        name="salary" 
+                        id="input-salary" 
+                        type="number" 
+                        class="w-full"
+                    />
                 </div>
                 <div class="w-full">
                     <label for="input-link">Link</label>
-                    <input bind:value={link} name="link" id="input-link" type="url" class="w-full"/>
+                    <input bind:value={link} 
+                        name="link" 
+                        id="input-link" 
+                        type="url" 
+                        class="w-full"
+                    />
+                </div>
+                <div class="w-full">
+                    <label for="input-date">Date applied</label>
+                    <input bind:value={appliedDate}
+                        type="date"                         
+                        name="input-date"                         
+                        class="w-full"                    
+                        max={new Date().toISOString().split('T')[0]}
+                        min={new Date().getFullYear()}
+                    />
                 </div>
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>
         </form>
 
-
+<style>
+    input::-webkit-calendar-picker-indicator{
+        display: none;
+    }
+</style>

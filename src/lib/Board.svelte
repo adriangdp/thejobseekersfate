@@ -35,19 +35,18 @@
                 status: JobStates[e.statusKey],
                 position: e.position,
                 company: e.company,
+                mode: e.mode,
                 salary: e.salary,
                 link: e.link,
                 appliedDate: e.appliedDate                
             }
-            if(e.mode){
-                job.mode = e.mode
-            } 
             return job
         })
     })
     
     let filteredApplications = $derived.by(
-        ():JobApplication[]=>{       
+        ():JobApplication[]=>{      
+
             let filteredArray = jobApplications.filter(a =>
             (a.status.situation === JobStates.rejected.situation && showRejected) ||
             (a.status.situation === JobStates.applied.situation && showApplied) ||
@@ -55,17 +54,33 @@
             (a.status.situation === JobStates.offer.situation && showOffer) ||
             (a.status.situation === JobStates.accepted.situation && showAccepted) ||
             (a.status.situation === JobStates.ghosted.situation && showGhosted)
-            )|| []
+            )|| []     
 
+            const sortBySalary = (a:JobApplication,b:JobApplication) =>{
+                if(a.salary === "unknown" && b.salary === "unknown"){
+                    return 0
+                } else if(a.salary === "unknown"){
+                    return 1
+                }else if(b.salary === "unknown"){
+                    return -1
+                }                  
+                                
+                return isAscendent ? 
+                    Number(a.salary) - Number(b.salary)
+                    : 
+                    Number(b.salary) - Number(a.salary)
+                
+            }
 
             filteredArray.sort((a,b):number=>{
                 switch(sortBy){
-                    case("salary") : { return isAscendent ? a.salary - b.salary : b.salary - a.salary}
-                    case("status") : { return isAscendent ? a.status.toString().localeCompare(b.status.toString()) : b.status.toString().localeCompare(a.status.toString())}
+                    case("salary") : { return sortBySalary(a,b)}
+                    case("status") : { return isAscendent ? a.status.situation.localeCompare(b.status.situation) : b.status.situation.localeCompare(a.status.situation)}
                     case("date") : {return isAscendent ? a.appliedDate.getTime() - b.appliedDate.getTime() : b.appliedDate.getTime() - a.appliedDate.getTime()}
                     default: return a.id-b.id
                 }
             })
+            
             return filteredArray
         }
     )

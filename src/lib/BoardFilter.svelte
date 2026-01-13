@@ -1,6 +1,5 @@
 <script lang="ts">
     import { JobStates } from "@data/jobStates";
-    import { type JobState, type JobApplication } from "@data/types";
 
 
     let { 

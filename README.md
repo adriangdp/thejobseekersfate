@@ -81,7 +81,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```bash
 npm run dev
 ```
-*Note it runs on port 3000 instead of the default.It can be changed on package.json*
+*Note it runs on port 3000 instead of the default. It can be changed on package.json*
 #### Production build
 ```bash
 npm run build
@@ -91,14 +91,19 @@ npm run build
 npm run preview
 ```
 
+#### Test:unit
+```bash
+npm run test
+```
+
 ## Known limitations and TODOs
-* Zod validates forms correctly, but handling errors gracefully is not yet implemented.
-* More form validation flexibility: defaults, optionals...
+* <del> Zod validates forms correctly, but handling errors gracefully is not yet implemented.</del>
+* <del>More form validation flexibility: defaults, optionals...</del>
 * Improve accesibility and aria attributes.
-* Add application form needs to take into account a salary range or unkown salary.
+* <del>Add application form needs to take into account unkown salary</del>.
 * Possibility of adding notes.
 * Right now, updating job applications is limited to status; but would be nice to be able to edit all fields.
-* Component and integration tests.
+* Component and unit tests.
 * Job Application statistics: compile and show an history of job application and status, salary trends, etc.
 * Add some details and decorations to certain aspects.
 * Another color theme.

@@ -95,7 +95,7 @@
         </li>
         <li>
             <select bind:value={sortBy}
-                class="bg-accent-inner"            
+                class="bg-accent-inner h-full"            
             >
                 <option value="default">Default</option>
                 <option value="date">Date</option>
@@ -104,9 +104,15 @@
             </select>
         </li>
         <li>
-            <select bind:value={isAscendent}>
-                <option value={false}>Desc./Newest</option>
-                <option value={true}>Asc./Oldest</option>
+            <select bind:value={isAscendent} 
+                class="bg-accent-inner h-full"
+            >
+                <option value={false}>
+                    Desc./Newest
+                </option>
+                <option value={true}>
+                    Asc./Oldest
+                </option>
             </select>
         </li>
     </ul>

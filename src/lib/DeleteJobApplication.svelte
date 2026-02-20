@@ -7,8 +7,10 @@
     }
 </script>
 
-<button onclick={handleDelete}
-    class="border-0 text-xl font-bold cursor-pointer bg-radial from-card-rejected/15 from-35% to-card-rejected/0 to-60%"     
-><img src="/img/icon-erase-entry.png" alt="close button icon"
-    class="w-8 md:w-12"
-/></button>
+<button class="grow flex items-center justify-center gap-1 w-1/2" onclick={handleDelete}>
+    <img src="/img/icon-delete.png" 
+        class="w-[25px] h-[25px]" 
+        alt="delete button icon"
+    />
+    <span>Archive</span>
+</button>

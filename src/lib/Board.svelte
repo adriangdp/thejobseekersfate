@@ -1,21 +1,22 @@
 <script lang="ts">
-
+    import { session } from "../store/session-store.svelte"
     import { dbGetAllJobs,dbCreateJob } from "../service/data-functions.svelte"
-    import { type Job, enumJobStatus } from "@data/types"
+    import { type Job, type JobEntry, enumJobStatus } from "@data/types"
+    import AddApplication from "@lib/AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
     import ClearDataButton from "@lib/ClearDataButton.svelte";
 
-    dbCreateJob({
+    /*dbCreateJob({
         id:20,
         status:enumJobStatus.applied,
         salary:2000,
         company:"Strange"
-    })
+    })*/
     //TODO: Include proper error handling
-    let jobData:Job[] = $state([])
+    let jobData:JobEntry[] = $state([])
     dbGetAllJobs()
     .then(data => {
         jobData = data
@@ -38,10 +39,9 @@
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
     
-    console.log("data is set" + jobData)
-    let filteredApplications = $derived.by(
-       
-        ():Job[]=>{   
+    console.table(jobData)
+    let filteredApplications:JobEntry[] = $derived.by(
+        ()=>{   
             
             if(jobData.length === 0){
                 console.log("Cannot filter. No jobs returned")
@@ -82,8 +82,6 @@
             })
             
             return filteredArray
-            console.log("filtered")
-            return []
         }
     )
 </script>
@@ -93,12 +91,14 @@
     <div class="max-w-full flex flex-wrap gap-2 justify-between">
         <div class="flex flex-wrap gap-2 justify-between">
             <SwitchView bind:isCardDisplay/>
+            {#if !session.loading && session.user}
             <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
                     class="flex gap-3"
             > 
                 <img  src="/img/icon-add.png" alt="add job application button icon" width="24px" height="24px" class="brightness-200"/>
                 <span>Add Job Application</span>
             </button>
+            {/if}
         </div>
         <!-- <ClearDataButton /> -->
     </div>
@@ -158,13 +158,13 @@
         {:else}
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> The stars do not align. Something unsettling is afoot.</span>
     {/if}
-    <!-- 
+    
         {#if showAddApplicationModal}
             <Modal bind:isOpen={showAddApplicationModal}>
                 <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
             </Modal>
         {/if}
-    -->
+    
     
 </div>
 

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { type Job } from "../data/types"
+    import { type Job, type JobEntry } from "../data/types"
     import BadgeStatus from "@lib/common/BadgeStatus.svelte"
     import JobDetail from "@lib/JobDetail.svelte";
     import { JobStyling } from "@data/jobStates";
 
     let showDetail: boolean = $state(false)
-    let { application, isCardDisplay } : {application:Job, isCardDisplay:boolean} = $props();
+    let { application, isCardDisplay } : {application:JobEntry, isCardDisplay:boolean} = $props();
     let { 
         id,
         status, 
@@ -68,7 +68,7 @@
 {:else}
     <tr onclick={()=>showDetail = true} class="cursor-pointer">
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">
-            <BadgeStatus state={status} />
+            <BadgeStatus status={status} />
         </td>
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{position}</td>
         <td class="border py-3 px-5 border-accent-outer text-sm md:text-base text-center min-w-40">{company}</td>

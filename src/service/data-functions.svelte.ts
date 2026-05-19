@@ -1,8 +1,8 @@
 import { supabaseClient } from "./supabase-client.svelte";
 import { session } from "../store/session-store.svelte";
-import type { Job } from "@data/types";
+import type { Job, JobEntry } from "@data/types";
 
-export async function dbCreateJob(job:Job){
+export async function dbCreateJob(job:JobEntry){
 
     if(!session.user){
         console.log("Early exit, no user authenticated")
@@ -28,7 +28,7 @@ export async function dbCreateJob(job:Job){
 }
 
 
-export async function dbGetAllJobs():Promise<Job[]>{
+export async function dbGetAllJobs():Promise<JobEntry[]>{
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }

@@ -1,12 +1,12 @@
 <script lang="ts">
-    import type { Job } from "@data/types";
+    import type { enumJobStatus, JobEntry } from "@data/types";
     import { JobStyling } from "@data/jobStates";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
 
-    let  { isOpen = $bindable(), application } : {application: Job, isOpen: boolean} = $props();
+    let  { isOpen = $bindable(), application } : {application: JobEntry, isOpen: boolean} = $props();
     let { 
         id,
         status, 
@@ -85,7 +85,7 @@
         <div class="mt-12 flex flex-col gap-5 md:gap-6">
                 <div>
                     <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatusFlag = !editStatusFlag}}>
-                        <BadgeStatus state={status} />   
+                        <BadgeStatus status={status as enumJobStatus} />   
                         {#if editStatusFlag}
                             <BadgeStatusChanger id={id} state={status}></BadgeStatusChanger>
                         {/if}

@@ -38,7 +38,6 @@ export type JobStyle ={
 }
 
 export type Job = {
-    id: number
     status: enumJobStatus,
     position?: string,
     company: string,
@@ -47,6 +46,10 @@ export type Job = {
     link?: string,
     notes?: string,
     applied_date?: string
+}
+
+export type JobEntry = Job & {
+    id:number;
 }
 
 

@@ -39,3 +39,13 @@ export type JobState ={
     },
 }
 
+export type Job = {
+    status: string,
+    position?: string,
+    company: string,
+    mode?: string,
+    salary?: number,
+    link?: string,
+    notes?: string,
+    applied_date?: string
+}

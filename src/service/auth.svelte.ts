@@ -4,9 +4,17 @@ import { session } from '../store/session-store.svelte';
 /**
  * Sets the user session as a global state
  */
-supabaseClient.auth.onAuthStateChange((authEvent, currentSession)=>{
-    session.user = currentSession?.user ?? null;
-    session.loading = false;
+supabaseClient.auth.onAuthStateChange(async(authEvent, currentSession)=>{
+    session.loading = true;
+    if(currentSession){
+        const { data } = await supabaseClient.auth.getUser();
+        session.user = data.user;
+        session.loading = false;
+    }
+    else{
+        session.user = null
+        session.loading = false;
+    }
 })
 
 

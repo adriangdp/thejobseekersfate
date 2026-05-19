@@ -27,4 +27,56 @@ export async function createJob(job:Job){
     }
 }
 
+
+export async function getAllUserJobs(){
+    if(!session.user){
+        console.log("Early exit, no user authenticated")
+    }
+
+    const userData = await supabaseClient.auth.getUser();
+    const user = userData.data.user;
+    console.log("Reading all");
+    const { data, error} = await supabaseClient.from('jobtrack').select()
+
+    if(error){
+        throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`)
+    }
+
+    console.log(data)
+}
     
+export async function deleteJob(id:number){
+    if(!session.user){
+        console.log("Early exit, no user authenticated")
+    }
+
+    const userData = await supabaseClient.auth.getUser();
+    const user = userData.data.user;
+    console.log("Deleting...");
+    const { data, error} = await supabaseClient.from('jobtrack').delete().eq("id",id).select()
+
+    if(error){
+        throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`)
+    }
+
+    console.log("Deleted: " + data)
+}
+
+
+export async function updateJob(id:number, job:Job){
+    if(!session.user){
+        console.log("Early exit, no user authenticated")
+    }
+
+    const userData = await supabaseClient.auth.getUser();
+    const user = userData.data.user;
+    console.log("Updating...");
+    const { data, error} = await supabaseClient.from('jobtrack').update(job).eq("id",id).select()
+
+    if(error){
+        throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`)
+    }
+
+    console.log("Updated: " + data)
+
+}

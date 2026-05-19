@@ -1,14 +1,9 @@
 <script lang="ts">
   import Header from '@lib/common/Header.svelte';
   import Board from '@lib/Board.svelte';
-  import { googleOAuth, GetToken, LogOut } from './service/supabase-client.svelte';
-  import { onMount } from 'svelte';
+  import { googleOAuth, LogOut } from './service/auth.svelte';
   import { session } from './store/session-store.svelte';
 
-
-  onMount(()=>{
-    GetToken();
-  })
 
 </script>
 

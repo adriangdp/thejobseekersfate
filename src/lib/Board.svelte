@@ -1,67 +1,67 @@
 <script lang="ts">
-    import { liveQuery } from "dexie"
-    import { db, clearTable } from "@data/db"
-    import { type JobState, type JobApplication, type JobData } from "@data/types"
-    import { JobStates } from "@data/jobStates"
-    import AddApplication from "./AddApplication.svelte"
+
+    import { dbGetAllJobs,dbCreateJob } from "../service/data-functions.svelte"
+    import { type Job, enumJobStatus } from "@data/types"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
     import ClearDataButton from "@lib/ClearDataButton.svelte";
+
+    dbCreateJob({
+        id:20,
+        status:enumJobStatus.applied,
+        salary:2000,
+        company:"Strange"
+    })
+    //TODO: Include proper error handling
+    let jobData:Job[] = $state([])
+    dbGetAllJobs()
+    .then(data => {
+        jobData = data
+    })
     
     let isCardDisplay: boolean = $state(true)
     let showAddApplicationModal:boolean = $state(false)
 
-    let showRejected: boolean = $state(true)
-    let showApplied: boolean = $state(true)
-    let showInterview: boolean = $state(true)
     let showOffer: boolean = $state(true)
-    let showAccepted: boolean = $state(true)
+    let showApplied: boolean = $state(true)
+    let showRejected: boolean = $state(true) 
+    let showInterview: boolean = $state(true)
     let showGhosted: boolean = $state(true)
+    let showAccepted: boolean = $state(true)
+
+
+    
     let isAllFiltersOff: boolean = $derived(!showRejected && !showApplied && !showInterview && !showOffer && !showAccepted && !showGhosted)
-
     let preventScroll: boolean = $derived(showAddApplicationModal)
-
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
-
-    let jobData:JobData[] = $state([])
-    liveQuery(()=> db.jobData.toArray()).subscribe(data => jobData = [...data])
-    let jobApplications:JobApplication[] = $derived.by(():JobApplication[]=>{
-        return jobData.map(e=>{
-            let job:JobApplication = {
-                id:e.id,
-                status: JobStates[e.statusKey],
-                position: e.position,
-                company: e.company,
-                mode: e.mode,
-                salary: e.salary,
-                link: e.link,
-                appliedDate: e.appliedDate                
-            }
-            return job
-        })
-    })
     
+    console.log("data is set" + jobData)
     let filteredApplications = $derived.by(
-        ():JobApplication[]=>{      
+       
+        ():Job[]=>{   
+            
+            if(jobData.length === 0){
+                console.log("Cannot filter. No jobs returned")
+                return [];
+            }
+            let filteredArray = jobData.filter((a:Job) =>
+                a.status === enumJobStatus.offer && showOffer ||
+                a.status === enumJobStatus.applied && showApplied ||
+                a.status === enumJobStatus.rejected && showRejected ||
+                a.status === enumJobStatus.interview && showInterview ||                
+                a.status === enumJobStatus.ghosted && showGhosted ||
+                a.status === enumJobStatus.accepted && showAccepted
+            )
 
-            let filteredArray = jobApplications.filter(a =>
-            (a.status.situation === JobStates.rejected.situation && showRejected) ||
-            (a.status.situation === JobStates.applied.situation && showApplied) ||
-            (a.status.situation === JobStates.interview.situation && showInterview) ||
-            (a.status.situation === JobStates.offer.situation && showOffer) ||
-            (a.status.situation === JobStates.accepted.situation && showAccepted) ||
-            (a.status.situation === JobStates.ghosted.situation && showGhosted)
-            )|| []     
-
-            const sortBySalary = (a:JobApplication,b:JobApplication) =>{
-                if(a.salary === "unknown" && b.salary === "unknown"){
+            const sortBySalary = (a:Job,b:Job) =>{
+                if(!a.salary && !b.salary){
                     return 0
-                } else if(a.salary === "unknown"){
+                } else if(a.salary?.toString() === "unknown"){
                     return 1
-                }else if(b.salary === "unknown"){
+                }else if(b.salary?.toString() === "unknown"){
                     return -1
                 }                  
                                 
@@ -72,16 +72,18 @@
                 
             }
 
-            filteredArray.sort((a,b):number=>{
+            filteredArray.sort((a,b)=>{
                 switch(sortBy){
                     case("salary") : { return sortBySalary(a,b)}
-                    case("status") : { return isAscendent ? a.status.situation.localeCompare(b.status.situation) : b.status.situation.localeCompare(a.status.situation)}
-                    case("date") : {return isAscendent ? a.appliedDate.getTime() - b.appliedDate.getTime() : b.appliedDate.getTime() - a.appliedDate.getTime()}
+                    case("status") : { return isAscendent ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status)}
+                    case("date") : {return isAscendent ? new Date(a.applied_date!).getTime() - new Date(b.applied_date!).getTime() : new Date(b.applied_date!).getTime() - new Date(a.applied_date!).getTime()}
                     default: return a.id-b.id
                 }
             })
             
             return filteredArray
+            console.log("filtered")
+            return []
         }
     )
 </script>
@@ -98,7 +100,7 @@
                 <span>Add Job Application</span>
             </button>
         </div>
-        <ClearDataButton />
+        <!-- <ClearDataButton /> -->
     </div>
     <BoardFilter 
         bind:showRejected 
@@ -156,11 +158,13 @@
         {:else}
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> The stars do not align. Something unsettling is afoot.</span>
     {/if}
-    {#if showAddApplicationModal}
-    <Modal bind:isOpen={showAddApplicationModal}>
-        <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
-    </Modal>
-
-    {/if}
+    <!-- 
+        {#if showAddApplicationModal}
+            <Modal bind:isOpen={showAddApplicationModal}>
+                <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
+            </Modal>
+        {/if}
+    -->
+    
 </div>
 

@@ -28,7 +28,7 @@ export async function dbCreateJob(job:Job){
 }
 
 
-export async function dbGetAllJobs(){
+export async function dbGetAllJobs():Promise<Job[]>{
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }
@@ -41,8 +41,9 @@ export async function dbGetAllJobs(){
     if(error){
         throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`)
     }
+    console.log(data);
 
-    console.log(data)
+    return data;
 }
     
 export async function dbDeleteJob(id:number){

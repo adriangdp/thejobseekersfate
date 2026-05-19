@@ -1,8 +1,8 @@
-import type { JobState, ReadOnlyDictionary} from "@data/types";
+import { enumJobStatus, type JobStylingDictionary } from "@data/types";
 
-export const JobStates:ReadOnlyDictionary<JobState> = {
+export const JobStyling:JobStylingDictionary = {
     offer:{
-        situation:"Offer",
+        state: enumJobStatus.offer,
         figureName:"The Wheel of Fortune",
         icon: "/img/icon-fortunewheel.png",
         styles:{
@@ -19,7 +19,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
     },
 
     applied:{
-        situation:"Applied",
+        state: enumJobStatus.applied,
         figureName:"The Waiting",
         icon: "/img/icon-sandclock.png",
         styles:{
@@ -35,7 +35,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
         }
     },
     rejected:{
-        situation:"Rejected",
+        state: enumJobStatus.rejected,
         figureName:"The Reaper",
         icon: "/img/icon-reaper.png",
         styles:{
@@ -51,7 +51,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
         },
     },
     interview:{
-        situation:"Interview",
+        state: enumJobStatus.interview,
         figureName:"The Judgement",
         icon: "/img/icon-scale.png",
         styles:{
@@ -67,7 +67,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
         }
     },
     ghosted:{        
-        situation:"Ghosted",
+        state: enumJobStatus.ghosted,
         figureName:"The Ghost",
         icon: "/img/icon-ghost.png",
         styles:{
@@ -83,7 +83,7 @@ export const JobStates:ReadOnlyDictionary<JobState> = {
         }
     },
     accepted:{
-        situation:"Accepted",
+        state: enumJobStatus.accepted,
         figureName:"The Star",
         icon: "/img/icon-star.png",
         styles:{

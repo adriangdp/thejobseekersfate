@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { clearTable } from "@data/db";
 
     let isFolded:boolean = $state(true)
 
@@ -9,7 +8,7 @@
     }
 
     const handleClearTable = () =>{
-        clearTable();
+        //clearTable();
         isFolded = true;
     }
 

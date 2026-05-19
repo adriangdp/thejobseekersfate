@@ -4,7 +4,6 @@
   import { googleOAuth, LogOut } from './service/auth.svelte';
   import { session } from './store/session-store.svelte';
 
-
 </script>
 
 <Header />

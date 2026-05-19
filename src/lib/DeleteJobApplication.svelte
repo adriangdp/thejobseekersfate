@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { db } from "@data/db";
+    import { dbDeleteJob } from "../service/data-functions.svelte";
     let{id} : { id:number} = $props();
 
     const handleDelete = async() =>{
-        const found = await db.jobData.where("id").equals(id).delete()
+        //add proper error handling
+        await dbDeleteJob(id)
     }
 </script>
 

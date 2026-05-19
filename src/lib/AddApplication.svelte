@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { db } from "@data/db";
-    import { JobStates } from "@data/jobStates";
+
     import { applicationSchema } from "@data/validation-schemas";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
 
@@ -17,7 +16,7 @@
     let formErrors:Record<string, string> = $state({});
 
     const handleNewApplication = async(e:Event) =>{
-        e.preventDefault();
+        /*e.preventDefault();
         const formData = {
             statusKey,
             position,
@@ -53,12 +52,12 @@
             }
             
             
-       
+       */
         
     }
 
 </script>
-
+<!--
         <form onsubmit={handleNewApplication} class="flex flex-col gap-8 h-fit">
             <div class="flex flex-col items-center gap-2 xl:gap-4">
                 <div>
@@ -156,7 +155,7 @@
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>
         </form>
-
+-->
 <style>
     input::-webkit-calendar-picker-indicator{
         display: none;

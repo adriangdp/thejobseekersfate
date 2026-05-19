@@ -1,21 +1,32 @@
 <script lang="ts">
-    import { type JobApplication, type JobState } from "@data/types";
-    import { db } from "@data/db";
-    import { applicationSchema } from "@data/validation-schemas";
+    import type { Job } from "@data/types";
+    import { JobStyling } from "@data/jobStates";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
 
-    let  { isOpen = $bindable(), jobApplication } : {jobApplication: JobApplication, isOpen: boolean} = $props()
-    let { id, status, position, company, salary, mode, link, appliedDate} = $derived(jobApplication)
-    let editableDate = $derived(appliedDate.toISOString().split('T')[0])
+    let  { isOpen = $bindable(), application } : {application: Job, isOpen: boolean} = $props();
+    let { 
+        id,
+        status, 
+        position, 
+        company, 
+        mode, 
+        salary, 
+        link, 
+        applied_date 
+    } = $derived(application);
+    let dateObject = $derived(applied_date ? new Date(applied_date) : null)
+    let jobStyle = $derived(JobStyling[status]);
+
+    let editableDate = $derived(applied_date ?? new Date().toISOString().split('T')[0] )
     let editableSalary = $derived.by(()=>{return isNaN(Number(salary)) ? null : Number(salary)})
     let editStatusFlag:boolean = $state(false);
     let editDataMode:boolean = $state(false)
     
     const handleModify = async(e:Event) =>{
-        e.preventDefault();
+        /*e.preventDefault();
 
         const formData = {
             statusKey: status.situation,
@@ -51,7 +62,7 @@
             }
             else{
                console.log(parseData.error.message)
-            }
+            }*/
     }
 
 
@@ -61,14 +72,14 @@
 <Modal bind:isOpen>
     <div class="flex flex-col">
         <div class="flex justify-between items-center gap-4 md:gap-6 w-full">
-            <img src={status.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
+            <img src={jobStyle.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
             <div>
                 {#if !editDataMode}
                 <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">{company}</span>              
                 {:else}
                 <input class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl" bind:value={company}/>               
                 {/if}
-                <span class="block font-rosarivo text-text-darker text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {status.figureName}  &#149;</span>
+                <span class="block font-rosarivo text-text-darker text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {jobStyle.figureName}  &#149;</span>
             </div>
         </div>
         <div class="mt-12 flex flex-col gap-5 md:gap-6">
@@ -99,7 +110,11 @@
                 <div>
                     <img src="/img/icon-coin.png" alt="salary icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{salary === "unknown" ? "unknown": Number(salary).toLocaleString('es-ES')+" €"} </span>
+                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">
+                            { 
+                                salary ? Number(salary).toLocaleString('es-ES')+" €" : "unknown"
+                            }
+                        </span>
                     {:else}
                         <input type="number" class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={editableSalary} />
                     {/if}
@@ -107,7 +122,14 @@
                 <div>
                     <img src="/img/icon-calendar.png" alt="added date icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{String(appliedDate.getDate()).padStart(2,'0')}/{appliedDate.getMonth()}/{appliedDate.getFullYear()}</span>
+                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">
+                            {
+                                dateObject ?
+                                    `${dateObject.getDay().toString().padStart(2,"0")}/${dateObject.getMonth().toString().padStart(2,"0")}/${dateObject.getFullYear()}`
+                                :
+                                    `No date`  
+                            }
+                        </span>
                     {:else}
                         <input
                         class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base"

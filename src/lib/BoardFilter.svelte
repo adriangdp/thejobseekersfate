@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { JobStates } from "@data/jobStates";
-
+    import { JobStyling } from "@data/jobStates";
 
     let { 
      showRejected  = $bindable(),
@@ -31,66 +30,66 @@
             <button onclick={()=>showOffer = !showOffer}
                 class={`${showOffer? '':'bg-background'} ${showOffer? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.offer.icon} 
-                    alt={`Filter by ${JobStates.offer.situation} icon`}
+                <img src={JobStyling.offer.icon} 
+                    alt={`Filter by ${JobStyling.offer.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.offer.situation}</span>
+                <span class="text-sm">{JobStyling.offer.state}</span>
             </button>
         </li>
         <li>
             <button onclick={()=>showApplied = !showApplied}
                 class={`${showApplied? '':'bg-background'} ${showApplied? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.applied.icon} 
-                    alt={`Filter by ${JobStates.applied.situation} icon`}
+                <img src={JobStyling.applied.icon} 
+                    alt={`Filter by ${JobStyling.applied.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.applied.situation}</span>
+                <span class="text-sm">{JobStyling.applied.state}</span>
             </button>
         </li>
         <li>
             <button onclick={()=>showInterview = !showInterview}
                 class={`${showInterview? '':'bg-background'} ${showInterview? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.interview.icon} 
-                    alt={`Filter by ${JobStates.interview.situation} icon`}
+                <img src={JobStyling.interview.icon} 
+                    alt={`Filter by ${JobStyling.interview.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.interview.situation}</span>
+                <span class="text-sm">{JobStyling.interview.state}</span>
             </button>
         </li>
         <li>
             <button onclick={()=>showRejected = !showRejected}
                 class={`${showRejected? '':'bg-background'} ${showRejected? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.rejected.icon} 
-                    alt={`Filter by ${JobStates.rejected.situation} icon`}
+                <img src={JobStyling.rejected.icon} 
+                    alt={`Filter by ${JobStyling.rejected.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.rejected.situation}</span>
+                <span class="text-sm">{JobStyling.rejected.state}</span>
             </button>
         </li>
         <li>
             <button onclick={()=>showGhosted = !showGhosted}
                 class={`${showGhosted? '':'bg-background'} ${showGhosted? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.ghosted.icon} 
-                    alt={`Filter by ${JobStates.ghosted.situation} icon`}
+                <img src={JobStyling.ghosted.icon} 
+                    alt={`Filter by ${JobStyling.ghosted.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.ghosted.situation}</span>
+                <span class="text-sm">{JobStyling.ghosted.state}</span>
             </button>
         </li>       
         <li>
             <button onclick={()=>showAccepted = !showAccepted}
                 class={`${showAccepted? '':'bg-background'} ${showAccepted? '':'border-accent-outer/50'}`}
             >
-                <img src={JobStates.accepted.icon} 
-                    alt={`Filter by ${JobStates.accepted.situation} icon`}
+                <img src={JobStyling.accepted.icon} 
+                    alt={`Filter by ${JobStyling.accepted.state} icon`}
                     width="20px" height="20px" class="inline"
                 />
-                <span class="text-sm">{JobStates.accepted.situation}</span>
+                <span class="text-sm">{JobStyling.accepted.state}</span>
             </button>
         </li>
         <li>

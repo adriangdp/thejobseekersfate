@@ -1,29 +1,27 @@
-export type ReadOnlyDictionary<T> = {readonly [key:string]:T}
+export enum enumJobStatus {
+    offer = "offer", 
+    applied = "applied", 
+    rejected = "rejected", 
+    interview = "interview", 
+    ghosted = "ghosted",
+    accepted = "accepted"
+};
 
-export type JobApplication = {
-    id:number,
-    status:JobState,
-    position:string,
-    company:string,
-    mode:string,
-    salary:string,
-    link:string,
-    appliedDate:Date,
+/*export type JobState = 
+    enumJobStatus.offer |
+    enumJobStatus.applied |
+    enumJobStatus.rejected | 
+    enumJobStatus.interview | 
+    enumJobStatus.ghosted |
+    enumJobStatus.accepted 
+*/
+
+export type JobStylingDictionary={
+    [key in enumJobStatus]:JobStyle
 }
 
-export type JobData = {
-    id:number,
-    statusKey:string,
-    position:string,
-    company:string,
-    mode:string,
-    salary:string,
-    link:string,
-    appliedDate:Date,
-}
-
-export type JobState ={
-    situation:string,
+export type JobStyle ={
+    state:enumJobStatus,
     figureName:string,
     icon:string,
     styles:{
@@ -40,7 +38,8 @@ export type JobState ={
 }
 
 export type Job = {
-    status: string,
+    id: number
+    status: enumJobStatus,
     position?: string,
     company: string,
     mode?: string,
@@ -49,3 +48,5 @@ export type Job = {
     notes?: string,
     applied_date?: string
 }
+
+

@@ -2,7 +2,7 @@ import { supabaseClient } from "./supabase-client.svelte";
 import { session } from "../store/session-store.svelte";
 import type { Job } from "@data/types";
 
-export async function createJob(job:Job){
+export async function dbCreateJob(job:Job){
 
     if(!session.user){
         console.log("Early exit, no user authenticated")
@@ -28,7 +28,7 @@ export async function createJob(job:Job){
 }
 
 
-export async function getAllUserJobs(){
+export async function dbGetAllJobs(){
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }
@@ -45,7 +45,7 @@ export async function getAllUserJobs(){
     console.log(data)
 }
     
-export async function deleteJob(id:number){
+export async function dbDeleteJob(id:number){
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }
@@ -63,7 +63,7 @@ export async function deleteJob(id:number){
 }
 
 
-export async function updateJob(id:number, job:Job){
+export async function dbUpdateJob(id:number, job:Job){
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }

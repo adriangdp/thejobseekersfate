@@ -2,11 +2,6 @@
     import { JobStyling } from "@data/jobStates";
     import { enumSortModes } from "@data/enum";
     import { filterStates } from "../store/filter-store.svelte";
-
-$effect(()=>{
-    $inspect(filterStates.sortBy, `Current sort order is ${filterStates.sortBy}`)
-    $inspect(filterStates.isAscendent, `Current sort direction is ${filterStates.isAscendent}`)
-})
 </script>
 
 <div class="my-5">

@@ -6,15 +6,27 @@ import { session } from '../store/session-store.svelte';
  */
 supabaseClient.auth.onAuthStateChange(async(authEvent, currentSession)=>{
     session.loading = true;
-    if(currentSession){
-        const { data } = await supabaseClient.auth.getUser();
-        session.user = data.user;
+
+     if (authEvent === 'INITIAL_SESSION') {
         session.loading = false;
-    }
-    else{
-        session.user = null
+        return;
+    } else if (authEvent === 'SIGNED_IN' && currentSession) {
+        session.user = currentSession.user;
         session.loading = false;
+        return;
+    } else if (authEvent === 'SIGNED_OUT') {
+        session.user = null;
+        session.loading = false;
+        return;
+    } else if (authEvent === 'TOKEN_REFRESHED' && currentSession) {
+        session.user = currentSession.user;
+        session.loading = false;
+        return;
     }
+
+    session.loading = false;
+    return;
+
 })
 
 

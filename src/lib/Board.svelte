@@ -26,13 +26,9 @@
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
     
-    console.log("THIS IS THE DATA")
-    console.log(jobData.values)
     let filteredApplications:JobEntry[] = $derived.by(
         ()=>{   
-            console.log ("filtering...")
             if(jobData.length === 0){
-                console.log("Cannot filter. No jobs returned")
                 return [];
             }
             let filteredArray = jobData.values.filter((a:Job) =>

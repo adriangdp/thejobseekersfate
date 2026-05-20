@@ -22,7 +22,6 @@
 
     const handleNewApplication = async(e:Event) =>{
         e.preventDefault();
-        console.log("handling new application")
         //Reset errors
         formErrors = {}
 
@@ -40,7 +39,6 @@
             const { data, success, error } = applicationSchema.safeParse(formData);
 
             if(success){
-                console.log("registered entry")
                 const newJob = await dbCreateJob(data);
 
                 if(newJob){

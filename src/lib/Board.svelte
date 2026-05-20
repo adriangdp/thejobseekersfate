@@ -1,73 +1,20 @@
 <script lang="ts">
-    import { enumJobStatus } from "@data/enum";
-    import { type Job, type JobEntry } from "@data/types"
+
     import { session } from "../store/session-store.svelte"
     import { jobData } from "../store/data-store.svelte";
-    import { dbGetAllJobs,dbCreateJob } from "../service/data-functions.svelte"    
+    import { applyFiltersAndSort, isAllFiltersOff } from "../store/filter-store.svelte";
     import AddApplication from "@lib/AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
-    import ClearDataButton from "@lib/ClearDataButton.svelte";
     
+    let filteredApplications = $derived(applyFiltersAndSort(jobData.values))
+
     let isCardDisplay: boolean = $state(true)
-    let showAddApplicationModal:boolean = $state(false)
-
-    let showOffer: boolean = $state(true)
-    let showApplied: boolean = $state(true)
-    let showRejected: boolean = $state(true) 
-    let showInterview: boolean = $state(true)
-    let showGhosted: boolean = $state(true)
-    let showAccepted: boolean = $state(true)
-    
-    let isAllFiltersOff: boolean = $derived(!showRejected && !showApplied && !showInterview && !showOffer && !showAccepted && !showGhosted)
+    let showAddApplicationModal:boolean = $state(false) 
     let preventScroll: boolean = $derived(showAddApplicationModal)
-    let sortBy:string = $state("default")
-    let isAscendent:boolean = $state(false)
-    
-    let filteredApplications:JobEntry[] = $derived.by(
-        ()=>{   
-            if(jobData.length === 0){
-                return [];
-            }
-            let filteredArray = jobData.values.filter((a:Job) =>
-                a.status === enumJobStatus.offer && showOffer ||
-                a.status === enumJobStatus.applied && showApplied ||
-                a.status === enumJobStatus.rejected && showRejected ||
-                a.status === enumJobStatus.interview && showInterview ||                
-                a.status === enumJobStatus.ghosted && showGhosted ||
-                a.status === enumJobStatus.accepted && showAccepted
-            )
 
-            const sortBySalary = (a:Job,b:Job) =>{
-                if(!a.salary && !b.salary){
-                    return 0
-                } else if(a.salary?.toString() === "unknown"){
-                    return 1
-                }else if(b.salary?.toString() === "unknown"){
-                    return -1
-                }                  
-                                
-                return isAscendent ? 
-                    Number(a.salary) - Number(b.salary)
-                    : 
-                    Number(b.salary) - Number(a.salary)
-                
-            }
-
-            filteredArray.sort((a,b)=>{
-                switch(sortBy){
-                    case("salary") : { return sortBySalary(a,b)}
-                    case("status") : { return isAscendent ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status)}
-                    case("date") : {return isAscendent ? new Date(a.applied_date!).getTime() - new Date(b.applied_date!).getTime() : new Date(b.applied_date!).getTime() - new Date(a.applied_date!).getTime()}
-                    default: return a.id-b.id
-                }
-            })
-            
-            return filteredArray
-        }
-    )
 </script>
 
 <div class={`${preventScroll ? 'max-h-screen overflow-hidden':''} w-full pt-4`
@@ -86,17 +33,7 @@
         </div>
         <!-- <ClearDataButton /> -->
     </div>
-    <BoardFilter 
-        bind:showRejected 
-        bind:showApplied 
-        bind:showInterview 
-        bind:showAccepted
-        bind:showOffer
-        bind:showGhosted
-        bind:sortBy 
-        bind:isAscendent
-    >
-    </BoardFilter>
+    <BoardFilter />
     {#if filteredApplications.length > 0}
         {#if isCardDisplay}
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
@@ -128,7 +65,7 @@
         </div>
 
         {/if}
-        {:else if jobData.length <= 0}
+        {:else if jobData.length <= 0 && !isAllFiltersOff()}
             <span class="block my-8 text-center text-text-darker text-2xl font-rosarivo"> 
                 Approach, oh fretting soul, and add a 
                 <button onclick={()=>{showAddApplicationModal = true}}
@@ -137,7 +74,7 @@
                 Job Application
                 </button> to recieve a reading.
             </span>
-        {:else if isAllFiltersOff}
+        {:else if isAllFiltersOff()}
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> No readings can be offered with all filters turned off.</span>
         {:else}
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> The stars do not align. Something unsettling is afoot.</span>

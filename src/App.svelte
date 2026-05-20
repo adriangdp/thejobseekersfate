@@ -6,10 +6,16 @@
   import { session } from './store/session-store.svelte';
   import { jobData } from './store/data-store.svelte';
 
-    dbGetAllJobs()
-    .then(data => {
-        jobData.set(data)
-    })
+  $effect(()=>{
+    if(session){
+      dbGetAllJobs()
+      .then(data => {
+          jobData.set(data)
+      })
+    }
+  })
+
+    
 </script>
 
 <Header />

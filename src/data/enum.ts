@@ -6,3 +6,10 @@ export enum enumJobStatus {
     ghosted = "ghosted",
     accepted = "accepted"
 };
+
+export enum enumSortModes {
+    default = "default",
+    salary = "salary",
+    status = "status",
+    date = "date"
+}

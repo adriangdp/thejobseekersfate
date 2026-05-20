@@ -1,34 +1,19 @@
 <script lang="ts">
     import { JobStyling } from "@data/jobStates";
+    import { enumSortModes } from "@data/enum";
+    import { filterStates } from "../store/filter-store.svelte";
 
-    let { 
-     showRejected  = $bindable(),
-     showApplied  = $bindable(),
-     showInterview  = $bindable(),
-     showOffer  = $bindable(),
-     showAccepted  = $bindable(),
-     showGhosted  = $bindable(),
-     sortBy = $bindable(),
-     isAscendent = $bindable()
-    }  :
-    {
-        showOffer : boolean,
-        showApplied : boolean,
-        showInterview : boolean,
-        showRejected : boolean,      
-        showGhosted : boolean,
-        showAccepted : boolean,
-        sortBy : string,
-        isAscendent : boolean,
-    }= $props()
-
+$effect(()=>{
+    $inspect(filterStates.sortBy, `Current sort order is ${filterStates.sortBy}`)
+    $inspect(filterStates.isAscendent, `Current sort direction is ${filterStates.isAscendent}`)
+})
 </script>
 
 <div class="my-5">
     <ul class="flex flex-wrap justify-center gap-4">
         <li>
-            <button onclick={()=>showOffer = !showOffer}
-                class={`${showOffer? '':'bg-background'} ${showOffer? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showOffer = !filterStates.showOffer}
+                class={`${filterStates.showOffer? '':'bg-background'} ${filterStates.showOffer? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.offer.icon} 
                     alt={`Filter by ${JobStyling.offer.state} icon`}
@@ -38,8 +23,8 @@
             </button>
         </li>
         <li>
-            <button onclick={()=>showApplied = !showApplied}
-                class={`${showApplied? '':'bg-background'} ${showApplied? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showApplied = !filterStates.showApplied}
+                class={`${filterStates.showApplied? '':'bg-background'} ${filterStates.showApplied? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.applied.icon} 
                     alt={`Filter by ${JobStyling.applied.state} icon`}
@@ -49,8 +34,8 @@
             </button>
         </li>
         <li>
-            <button onclick={()=>showInterview = !showInterview}
-                class={`${showInterview? '':'bg-background'} ${showInterview? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showInterview = !filterStates.showInterview}
+                class={`${filterStates.showInterview? '':'bg-background'} ${filterStates.showInterview? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.interview.icon} 
                     alt={`Filter by ${JobStyling.interview.state} icon`}
@@ -60,8 +45,8 @@
             </button>
         </li>
         <li>
-            <button onclick={()=>showRejected = !showRejected}
-                class={`${showRejected? '':'bg-background'} ${showRejected? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showRejected = !filterStates.showRejected}
+                class={`${filterStates.showRejected? '':'bg-background'} ${filterStates.showRejected? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.rejected.icon} 
                     alt={`Filter by ${JobStyling.rejected.state} icon`}
@@ -71,8 +56,8 @@
             </button>
         </li>
         <li>
-            <button onclick={()=>showGhosted = !showGhosted}
-                class={`${showGhosted? '':'bg-background'} ${showGhosted? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showGhosted = !filterStates.showGhosted}
+                class={`${filterStates.showGhosted? '':'bg-background'} ${filterStates.showGhosted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.ghosted.icon} 
                     alt={`Filter by ${JobStyling.ghosted.state} icon`}
@@ -82,8 +67,8 @@
             </button>
         </li>       
         <li>
-            <button onclick={()=>showAccepted = !showAccepted}
-                class={`${showAccepted? '':'bg-background'} ${showAccepted? '':'border-accent-outer/50'}`}
+            <button onclick={()=>filterStates.showAccepted = !filterStates.showAccepted}
+                class={`${filterStates.showAccepted? '':'bg-background'} ${filterStates.showAccepted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.accepted.icon} 
                     alt={`Filter by ${JobStyling.accepted.state} icon`}
@@ -93,17 +78,17 @@
             </button>
         </li>
         <li>
-            <select bind:value={sortBy}
+            <select bind:value={filterStates.sortBy}
                 class="bg-accent-inner h-full"            
             >
-                <option value="default">Default</option>
-                <option value="date">Date</option>
-                <option value="salary">Salary</option>
-                <option value="status">Status</option>
+                <option value={enumSortModes.default}>Default</option>
+                <option value={enumSortModes.date}>Date</option>
+                <option value={enumSortModes.salary}>Salary</option>
+                <option value={enumSortModes.status}>Status</option>
             </select>
         </li>
         <li>
-            <select bind:value={isAscendent} 
+            <select bind:value={filterStates.isAscendent} 
                 class="bg-accent-inner h-full"
             >
                 <option value={false}>

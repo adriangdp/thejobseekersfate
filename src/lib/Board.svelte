@@ -35,37 +35,38 @@
         <ClearDataButton />
     </div>
     <BoardFilter />
-    {#if filteredApplications.length > 0}
-        {#if isCardDisplay}
-            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
-                {#each filteredApplications as cardApplication}
-                    <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
-                {/each}
-            </div>
-        {:else}
-        <div class="w-full overflow-x-auto">
-            <table class="lg:mx-auto lg:w-full">
-                <thead class="bg-accent-inner">
-                    <tr>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Status</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Position</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Company</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Mode</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Salary</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Link</th>
-                        <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Added Date</th>
-                    </tr>
-                </thead>
-                <tbody>                
-                    {#each filteredApplications as application }
-                        <JobDisplay application={application} isCardDisplay={false}></JobDisplay>
+    {#if session.user && !session.loading}
+        {#if filteredApplications.length > 0}
+            {#if isCardDisplay}
+                <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
+                    {#each filteredApplications as cardApplication}
+                        <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
                     {/each}
-            
-                </tbody>
-            </table>
-        </div>
+                </div>
+            {:else}
+            <div class="w-full overflow-x-auto">
+                <table class="lg:mx-auto lg:w-full">
+                    <thead class="bg-accent-inner">
+                        <tr>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Status</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Position</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Company</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Mode</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Salary</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Link</th>
+                            <th class="border p-3 border-accent-outer text-text-darker text-sm md:text-base">Added Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>                
+                        {#each filteredApplications as application }
+                            <JobDisplay application={application} isCardDisplay={false}></JobDisplay>
+                        {/each}
+                
+                    </tbody>
+                </table>
+            </div>
 
-        {/if}
+            {/if}
         {:else if jobData.length <= 0 && !isAllFiltersOff()}
             <span class="block my-8 text-center text-text-darker text-2xl font-rosarivo"> 
                 Approach, oh fretting soul, and add a 
@@ -79,13 +80,17 @@
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> No readings can be offered with all filters turned off.</span>
         {:else}
             <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> The stars do not align. Something unsettling is afoot.</span>
+        {/if}
+    {:else}
+        <span class="block mt-8 text-center text-text-darker text-2xl font-rosarivo"> Please, mysterious soul, identify yourself to know your fate...</span>
     {/if}
     
-        {#if showAddApplicationModal}
-            <Modal bind:isOpen={showAddApplicationModal}>
-                <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
-            </Modal>
-        {/if}
+    
+    {#if showAddApplicationModal}
+        <Modal bind:isOpen={showAddApplicationModal}>
+            <AddApplication bind:showAddApplicationModal={showAddApplicationModal} />
+        </Modal>
+    {/if}
     
     
 </div>

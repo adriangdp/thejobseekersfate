@@ -21,7 +21,10 @@
 <Header />
 <main class="w-11/12 mx-auto">
 {#if session.user == null}
-  <button onclick={()=>googleOAuth()}>LOGIN GOOGLE</button>
+  <button onclick={()=>googleOAuth()} class="flex">
+    <img  src="/img/icon-google.png" alt="Log in with google" width="24px" height="24px" class="brightness-200"/>
+    Log In with Google
+  </button>
 {:else}
   <button onclick={()=>LogOut()}>LOG OUT</button>
 {/if}

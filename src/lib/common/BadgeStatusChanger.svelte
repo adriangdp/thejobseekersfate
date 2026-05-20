@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { type Job, enumJobStatus } from "@data/types";
+    import { enumJobStatus } from "@data/enum";
+    import { type Job } from "@data/types";
     import { JobStyling } from "@data/jobStates";
  
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
@@ -18,7 +19,7 @@
     {#each Object.values(enumJobStatus) as enumStatus}
         {#if enumStatus !== state}
             <button class={`button-invisible cursor-pointer p-0`}  onclick={()=>handleStateChange(enumStatus)}>
-                <BadgeStatus state={enumStatus}></BadgeStatus>
+                <BadgeStatus status={enumStatus}></BadgeStatus>
             </button>   
         {/if}
         

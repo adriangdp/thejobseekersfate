@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { enumJobStatus, type JobEntry } from "@data/types";
+    import { enumJobStatus } from "@data/enum";
+    import { type JobEntry } from "@data/types";
     import { JobStyling } from "@data/jobStates";
 
     let {status}: {status:enumJobStatus} = $props()

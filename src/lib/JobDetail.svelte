@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type { enumJobStatus, JobEntry } from "@data/types";
+    import { enumJobStatus } from "@data/enum";
+    import type { JobEntry } from "@data/types";    
     import { JobStyling } from "@data/jobStates";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";

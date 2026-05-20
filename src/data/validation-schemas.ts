@@ -1,13 +1,13 @@
 import { z } from "zod";
-
+import { enumJobStatus } from "@data/enum";
 
 export const applicationSchema = z.object({
-    statusKey: z.string("Missing application status"),
-    position: z.string("Field is empty").nullable(),
-    company: z.string("Field is empty"),
-    mode: z.string("mode").default("unknown").nullable(),
-    salary: z.number("salary").positive().transform(String).nullable().transform(val=>val?? "unknown"),
-    link: z.url("Field is empty").nullable(),
-    notes:z.string("No notes").nullable(),
-    appliedDate: z.date().nullable()
+    status: z.enum(Object.values(enumJobStatus) as string[], {error: "Invalid status"}),
+    position: z.string().optional(),
+    company: z.string().min(1,{error:"Company is empty"}),
+    mode: z.string().optional(),
+    salary: z.number().positive({error:"Salary must be positive or empty"}).optional(),
+    link: z.url().optional(),
+    notes:z.string().optional(),
+    applied_date: z.date().optional()
 })

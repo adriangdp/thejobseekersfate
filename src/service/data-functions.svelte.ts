@@ -1,30 +1,33 @@
 import { supabaseClient } from "./supabase-client.svelte";
 import { session } from "../store/session-store.svelte";
-import type { Job, JobEntry } from "@data/types";
+import type { Job, JobEntry, JobPost } from "@data/types";
 
-export async function dbCreateJob(job:JobEntry){
+export async function dbCreateJob(job:JobPost):Promise<JobEntry|null>{
 
     if(!session.user){
         console.log("Early exit, no user authenticated")
+        return null;
     }
 
-    const userData = await supabaseClient.auth.getUser();
-    const user = userData.data.user;
-
-    console.log("Writing...")
-    const { data, error} = await supabaseClient.from('jobtrack').insert(
-    {
+    const jobPost = {
         user_id: session.user!.id,
         ...job
     }
-    ).select()
+
+    console.log("Writing...")
+    const {
+        data, 
+        error
+    } = await supabaseClient.from('jobtrack').insert(jobPost).select()
     
     if(error){
-    console.log("ERROR: " + (error?.code + error?.cause + error?.name))
+        console.log("ERROR: " + (error?.code + error?.cause + error?.name))
+        return null;
     }
-    else{
+    
     console.log("WRITE: " + data )
-    }
+    return data[0] as JobEntry;
+    
 }
 
 
@@ -64,7 +67,7 @@ export async function dbDeleteJob(id:number){
 }
 
 
-export async function dbUpdateJob(id:number, job:Job){
+export async function dbUpdateJob(job:JobEntry){
     if(!session.user){
         console.log("Early exit, no user authenticated")
     }
@@ -72,7 +75,7 @@ export async function dbUpdateJob(id:number, job:Job){
     const userData = await supabaseClient.auth.getUser();
     const user = userData.data.user;
     console.log("Updating...");
-    const { data, error} = await supabaseClient.from('jobtrack').update(job).eq("id",id).select()
+    const { data, error} = await supabaseClient.from('jobtrack').update(job).eq("id",job.id).select()
 
     if(error){
         throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`)

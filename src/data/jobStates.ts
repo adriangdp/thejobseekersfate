@@ -1,4 +1,5 @@
-import { enumJobStatus, type JobStylingDictionary } from "@data/types";
+import { type JobStylingDictionary } from "@data/types";
+import { enumJobStatus } from "@data/enum";
 
 export const JobStyling:JobStylingDictionary = {
     offer:{

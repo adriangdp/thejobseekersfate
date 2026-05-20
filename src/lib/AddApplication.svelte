@@ -1,79 +1,79 @@
 <script lang="ts">
-
+    import { enumJobStatus } from "@data/enum";
+    import { type Job, type JobEntry, type JobPost } from "@data/types";
     import { applicationSchema } from "@data/validation-schemas";
+    import { jobData } from "../store/data-store.svelte";
+    import { dbCreateJob } from "../service/data-functions.svelte";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
+    import { session } from "../store/session-store.svelte";
+
 
     let{ showAddApplicationModal = $bindable() } : {showAddApplicationModal : boolean}= $props()
   
-    let statusKey: string = $state("offer");
+    let status: enumJobStatus = $state(enumJobStatus.offer);
     let position: string|undefined = $state();
     let company: string|undefined = $state();
-    let mode: string = $state("");
-    let salary: number|null = $state(null);
-    let link: string = $state("");
-    let appliedDate: string = $state(new Date().toISOString().split("T")[0]);
+    let mode: string|undefined = $state();
+    let salary: number|undefined = $state();
+    let link: string|undefined = $state();
+    let appliedDate: string|undefined = $state(new Date().toISOString().split("T")[0]);
 
     let formErrors:Record<string, string> = $state({});
 
     const handleNewApplication = async(e:Event) =>{
-        /*e.preventDefault();
+        e.preventDefault();
+        console.log("handling new application")
+        //Reset errors
+        formErrors = {}
+
         const formData = {
-            statusKey,
+            status,
             position,
             company,
             mode,
             salary,
             link,
-            appliedDate: new Date(appliedDate)
+            applied_date: appliedDate ? new Date(appliedDate) : new Date()
         }
-            const parseData = applicationSchema.safeParse(formData);
+            const { data, success, error } = applicationSchema.safeParse(formData);
 
-            if(parseData.success){
-                const id = await db.jobData.add(parseData.data);
-            
-                statusKey="offer"
-                position=""
-                company=""
-                mode=""
-                salary=null
-                link=""
+            if(success){
+                console.log("registered entry")
+                const newJob = await dbCreateJob(data);
 
-                showAddApplicationModal = false
+                if(newJob){
+                    jobData.add(newJob)
+                }
+                showAddApplicationModal = false;
+                // TODO: Handle optimistic update fail gracefully
             }
             else{
-               const errors = parseData.error.issues;
+               const errors = error.issues;
                 errors.forEach((err)=>{
                     const error = err.path[0] as string;
                     if(error && !formErrors[error]){
                         formErrors[error] = err.message;
                     }
                 })
-               
-            }
-            
-            
-       */
-        
+               console.table(errors)
+            } 
     }
 
 </script>
-<!--
+
         <form onsubmit={handleNewApplication} class="flex flex-col gap-8 h-fit">
             <div class="flex flex-col items-center gap-2 xl:gap-4">
                 <div>
                     <label for="input-status">Status</label>
                     <div class="flex flex-wrap items-center gap-2 xl:gap-5 mt-3">
-                        {#each Object.entries(JobStates) as [key,option]}
-                            <button onclick={()=>statusKey = key}
-                                type="button" 
-                                class={`button-invisible cursor-pointer 
-                                    ${key === statusKey? 
-                                        'brightness-250':''
-                                    } p-0`
-                                }
+                        {#each Object.keys(enumJobStatus) as key (key)}
+                             <button
+                                onclick={() => status = key as enumJobStatus}
+                                type="button"
+                                class={`button-invisible cursor-pointer ${status === key ? 'brightness-250' : ''} p-0`}
                             >
-                                <BadgeStatus state={option}></BadgeStatus>
-                            </button>                                  
+                                <BadgeStatus status={key as enumJobStatus} />
+                            </button>                            
                         {/each}
                     </div>
                 </div>
@@ -155,7 +155,7 @@
             </div> 
             <button type="submit" class="w-full h-full"> Apply here</button>
         </form>
--->
+
 <style>
     input::-webkit-calendar-picker-indicator{
         display: none;

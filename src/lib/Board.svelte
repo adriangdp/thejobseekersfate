@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { enumJobStatus } from "@data/enum";
+    import { type Job, type JobEntry } from "@data/types"
     import { session } from "../store/session-store.svelte"
-    import { dbGetAllJobs,dbCreateJob } from "../service/data-functions.svelte"
-    import { type Job, type JobEntry, enumJobStatus } from "@data/types"
+    import { jobData } from "../store/data-store.svelte";
+    import { dbGetAllJobs,dbCreateJob } from "../service/data-functions.svelte"    
     import AddApplication from "@lib/AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
     import JobDisplay from "@lib/JobDisplay.svelte"
@@ -16,11 +18,10 @@
         company:"Strange"
     })*/
     //TODO: Include proper error handling
-    let jobData:JobEntry[] = $state([])
-    dbGetAllJobs()
+    /*dbGetAllJobs()
     .then(data => {
-        jobData = data
-    })
+        jobData.set(data)
+    })*/
     
     let isCardDisplay: boolean = $state(true)
     let showAddApplicationModal:boolean = $state(false)
@@ -31,23 +32,21 @@
     let showInterview: boolean = $state(true)
     let showGhosted: boolean = $state(true)
     let showAccepted: boolean = $state(true)
-
-
     
     let isAllFiltersOff: boolean = $derived(!showRejected && !showApplied && !showInterview && !showOffer && !showAccepted && !showGhosted)
     let preventScroll: boolean = $derived(showAddApplicationModal)
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
     
-    console.table(jobData)
+    console.table(jobData.values)
     let filteredApplications:JobEntry[] = $derived.by(
         ()=>{   
-            
+            console.log ("filtering...")
             if(jobData.length === 0){
                 console.log("Cannot filter. No jobs returned")
                 return [];
             }
-            let filteredArray = jobData.filter((a:Job) =>
+            let filteredArray = jobData.values.filter((a:Job) =>
                 a.status === enumJobStatus.offer && showOffer ||
                 a.status === enumJobStatus.applied && showApplied ||
                 a.status === enumJobStatus.rejected && showRejected ||

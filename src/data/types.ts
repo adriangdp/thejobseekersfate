@@ -1,20 +1,8 @@
-export enum enumJobStatus {
-    offer = "offer", 
-    applied = "applied", 
-    rejected = "rejected", 
-    interview = "interview", 
-    ghosted = "ghosted",
-    accepted = "accepted"
-};
+import { enumJobStatus } from "@data/enum"
+import z from "zod"
+import { applicationSchema } from "@data/validation-schemas"
 
-/*export type JobState = 
-    enumJobStatus.offer |
-    enumJobStatus.applied |
-    enumJobStatus.rejected | 
-    enumJobStatus.interview | 
-    enumJobStatus.ghosted |
-    enumJobStatus.accepted 
-*/
+
 
 export type JobStylingDictionary={
     [key in enumJobStatus]:JobStyle
@@ -51,5 +39,7 @@ export type Job = {
 export type JobEntry = Job & {
     id:number;
 }
+
+export type JobPost = z.infer<typeof applicationSchema>;
 
 

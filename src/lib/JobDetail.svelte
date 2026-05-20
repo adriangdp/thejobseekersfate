@@ -1,11 +1,16 @@
 <script lang="ts">
     import { enumJobStatus } from "@data/enum";
-    import type { JobEntry } from "@data/types";    
+    import type { Job, JobEntry, JobPost } from "@data/types";    
     import { JobStyling } from "@data/jobStates";
+    import { applicationSchema } from "@data/validation-schemas";
+    import { jobData } from "../store/data-store.svelte";
+    import { dbUpdateJob, dbDeleteJob } from "../service/data-functions.svelte";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
+  import { unknown } from "zod";
+
 
     let  { isOpen = $bindable(), application } : {application: JobEntry, isOpen: boolean} = $props();
     let { 
@@ -21,52 +26,48 @@
     let dateObject = $derived(applied_date ? new Date(applied_date) : null)
     let jobStyle = $derived(JobStyling[status]);
 
-    let editableDate = $derived(applied_date ?? new Date().toISOString().split('T')[0] )
-    let editableSalary = $derived.by(()=>{return isNaN(Number(salary)) ? null : Number(salary)})
+    let editableDate = $derived(applied_date ?? new Date().toISOString().split('T')[0] );
+    let editableSalary = $derived(salary);
+    let editableLink = $derived(link);
     let editStatusFlag:boolean = $state(false);
     let editDataMode:boolean = $state(false)
     
     const handleModify = async(e:Event) =>{
-        /*e.preventDefault();
+        e.preventDefault();
 
-        const formData = {
-            statusKey: status.situation,
+        const formData:JobPost = {
+            status: status as enumJobStatus,
             position,
             company,
             mode,
-            salary: editableSalary,
-            link,
-            appliedDate: new Date(editableDate)
+            salary: editableSalary ?? undefined,
+            link: editableLink ?? undefined,
+            applied_date: editableDate? new Date(editableDate) : undefined
         }
-            const parseData = applicationSchema.safeParse(formData);
+            const {data, error} = applicationSchema.safeParse(formData);
 
-            if(parseData.success){
-                await db.jobData.where("id").equals(id).modify(
-                    {position:parseData.data.position}
-                )
-                await db.jobData.where("id").equals(id).modify(
-                    {company:parseData.data.company}
-                )
-                await db.jobData.where("id").equals(id).modify(
-                    {mode:parseData.data.mode}
-                )
-                await db.jobData.where("id").equals(id).modify(
-                    {salary:parseData.data.salary}
-                )
-                await db.jobData.where("id").equals(id).modify(
-                    {link:parseData.data.link}
-                )
-                await db.jobData.where("id").equals(id).modify(
-                    {appliedDate:parseData.data.appliedDate}
-                )
+            if(data){
+                const updateJob: JobEntry = {
+                    id:id,
+                    ...formData,
+                    status: formData.status as enumJobStatus,
+                    applied_date: formData.applied_date?.toISOString().split('T')[0] ?? undefined
+                }
+                await dbUpdateJob(updateJob)
+                jobData.update(updateJob)
                 editDataMode = false;
             }
             else{
-               console.log(parseData.error.message)
-            }*/
+               throw new Error(error.message)
+            }
     }
 
-
+    const handleBadgeChange = (newStatus:enumJobStatus) => {
+        const job = {...application, status:newStatus}
+        dbUpdateJob(job)
+        jobData.update(job)
+        editDataMode = false;
+    }
 
 </script>
 
@@ -88,14 +89,16 @@
                     <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatusFlag = !editStatusFlag}}>
                         <BadgeStatus status={status as enumJobStatus} />   
                         {#if editStatusFlag}
-                            <BadgeStatusChanger id={id} state={status}></BadgeStatusChanger>
+                            <BadgeStatusChanger state={status} callback={handleBadgeChange}></BadgeStatusChanger>
                         {/if}
                     </button>
                 </div>                
                 <div>
                     <img src="/img/icon-building.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
-                    {#if !editDataMode}
+                    {#if !editDataMode && position}
                     <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{position}</span>
+                    {:else if !editDataMode}
+                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">unknown</span>
                     {:else}
                     <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={position} />
                     {/if}
@@ -144,10 +147,12 @@
                 </div>
                 <div>
                     <img src="/img/icon-link.png" alt="added date icon"  class="w-8 md:w-9 inline" />
-                    {#if !editDataMode}
+                    {#if !editDataMode && link}
                         <a href={link} class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">Link to offer</a>
-                    {:else}
-                        <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" value={link} />
+                    {:else if !editDataMode}
+                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">No link recorded</span>
+                    {:else if editDataMode}
+                        <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={editableLink} />
                     {/if}
                 </div>     
         </div>

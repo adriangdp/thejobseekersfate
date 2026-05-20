@@ -7,7 +7,7 @@ export const applicationSchema = z.object({
     company: z.string().min(1,{error:"Company is empty"}),
     mode: z.string().optional(),
     salary: z.number().positive({error:"Salary must be positive or empty"}).optional(),
-    link: z.url().optional(),
+    link: z.preprocess(val => val === "" ? undefined: val, z.url().optional()),
     notes:z.string().optional(),
     applied_date: z.date().optional()
 })

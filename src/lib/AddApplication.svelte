@@ -26,15 +26,17 @@
         //Reset errors
         formErrors = {}
 
-        const formData = {
+        const formData:JobPost = {
             status,
             position,
-            company,
+            company: company ?? "",
             mode,
             salary,
             link,
-            applied_date: appliedDate ? new Date(appliedDate) : new Date()
+            applied_date: appliedDate ? new Date(appliedDate) : undefined
         }
+
+    
             const { data, success, error } = applicationSchema.safeParse(formData);
 
             if(success){

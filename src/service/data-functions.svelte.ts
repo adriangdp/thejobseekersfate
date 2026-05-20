@@ -1,6 +1,7 @@
 import { supabaseClient } from "./supabase-client.svelte";
 import { session } from "../store/session-store.svelte";
 import type { Job, JobEntry, JobPost } from "@data/types";
+import type { enumJobStatus } from "@data/enum";
 
 export async function dbCreateJob(job:JobPost):Promise<JobEntry|null>{
 
@@ -36,8 +37,6 @@ export async function dbGetAllJobs():Promise<JobEntry[]>{
         console.log("Early exit, no user authenticated")
     }
 
-    const userData = await supabaseClient.auth.getUser();
-    const user = userData.data.user;
     console.log("Reading all");
     const { data, error} = await supabaseClient.from('jobtrack').select()
 
@@ -54,8 +53,6 @@ export async function dbDeleteJob(id:number){
         console.log("Early exit, no user authenticated")
     }
 
-    const userData = await supabaseClient.auth.getUser();
-    const user = userData.data.user;
     console.log("Deleting...");
     const { data, error} = await supabaseClient.from('jobtrack').delete().eq("id",id).select()
 
@@ -72,8 +69,6 @@ export async function dbUpdateJob(job:JobEntry){
         console.log("Early exit, no user authenticated")
     }
 
-    const userData = await supabaseClient.auth.getUser();
-    const user = userData.data.user;
     console.log("Updating...");
     const { data, error} = await supabaseClient.from('jobtrack').update(job).eq("id",job.id).select()
 

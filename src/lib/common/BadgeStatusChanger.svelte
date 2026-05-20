@@ -1,15 +1,12 @@
 <script lang="ts">
     import { enumJobStatus } from "@data/enum";
-    import { type Job } from "@data/types";
-    import { JobStyling } from "@data/jobStates";
  
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
-    let{state, id} : { state: enumJobStatus, id:number} = $props();
+    let{state, callback} : { 
+        state: enumJobStatus, 
+        callback:(newStatus:enumJobStatus)=>void} 
+    = $props();
 
-
-    const handleStateChange =async(jobstate:string)=>{
-        /*await db.jobData.where("id").equals(id).modify({statusKey:jobstate})*/
-    }
 </script>
 
 
@@ -18,7 +15,7 @@
    
     {#each Object.values(enumJobStatus) as enumStatus}
         {#if enumStatus !== state}
-            <button class={`button-invisible cursor-pointer p-0`}  onclick={()=>handleStateChange(enumStatus)}>
+            <button class={`button-invisible cursor-pointer p-0`}  onclick={()=>callback(enumStatus)}>
                 <BadgeStatus status={enumStatus}></BadgeStatus>
             </button>   
         {/if}

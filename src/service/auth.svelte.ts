@@ -25,6 +25,7 @@ supabaseClient.auth.onAuthStateChange(async(authEvent, currentSession)=>{
     }
 
     session.loading = false;
+    console.table(session)
     return;
 
 })

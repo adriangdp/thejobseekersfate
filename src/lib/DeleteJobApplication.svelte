@@ -1,11 +1,8 @@
 <script lang="ts">
     import { dbDeleteJob } from "../service/data-functions.svelte";
-    let{id} : { id:number} = $props();
+    import { jobData } from "../store/data-store.svelte";
+    let{id, handleDelete} : { id:number, handleDelete:()=>void} = $props();
 
-    const handleDelete = async() =>{
-        //add proper error handling
-        await dbDeleteJob(id)
-    }
 </script>
 
 <button class="grow flex items-center justify-center gap-1 w-1/2" onclick={handleDelete}>

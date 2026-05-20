@@ -9,7 +9,7 @@
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
-  import { unknown } from "zod";
+  import { iso, unknown } from "zod";
 
 
     let  { isOpen = $bindable(), application } : {application: JobEntry, isOpen: boolean} = $props();
@@ -67,6 +67,13 @@
         dbUpdateJob(job)
         jobData.update(job)
         editDataMode = false;
+    }
+
+    const handleDelete = async() =>{
+        //add proper error handling
+        await dbDeleteJob(id)
+        jobData.remove(id)
+        isOpen = false;
     }
 
 </script>
@@ -184,7 +191,7 @@
                 </span> 
             </button>
             {/if}
-            <DeleteJobApplication id={id} />           
+            <DeleteJobApplication id={id} handleDelete={handleDelete}/>           
         </div>
 
     </div>

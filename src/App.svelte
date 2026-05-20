@@ -1,9 +1,15 @@
 <script lang="ts">
   import Header from '@lib/common/Header.svelte';
   import Board from '@lib/Board.svelte';
+  import { dbGetAllJobs } from './service/data-functions.svelte';
   import { googleOAuth, LogOut } from './service/auth.svelte';
   import { session } from './store/session-store.svelte';
+  import { jobData } from './store/data-store.svelte';
 
+    dbGetAllJobs()
+    .then(data => {
+        jobData.set(data)
+    })
 </script>
 
 <Header />

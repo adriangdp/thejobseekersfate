@@ -10,18 +10,6 @@
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
     import ClearDataButton from "@lib/ClearDataButton.svelte";
-
-    /*dbCreateJob({
-        id:20,
-        status:enumJobStatus.applied,
-        salary:2000,
-        company:"Strange"
-    })*/
-    //TODO: Include proper error handling
-    /*dbGetAllJobs()
-    .then(data => {
-        jobData.set(data)
-    })*/
     
     let isCardDisplay: boolean = $state(true)
     let showAddApplicationModal:boolean = $state(false)
@@ -38,7 +26,8 @@
     let sortBy:string = $state("default")
     let isAscendent:boolean = $state(false)
     
-    console.table(jobData.values)
+    console.log("THIS IS THE DATA")
+    console.log(jobData.values)
     let filteredApplications:JobEntry[] = $derived.by(
         ()=>{   
             console.log ("filtering...")

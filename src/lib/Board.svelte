@@ -8,6 +8,7 @@
     import JobDisplay from "@lib/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
+    import ClearDataButton from "@lib/ClearDataButton.svelte";
     
     let filteredApplications = $derived(applyFiltersAndSort(jobData.values))
 
@@ -31,7 +32,7 @@
             </button>
             {/if}
         </div>
-        <!-- <ClearDataButton /> -->
+        <ClearDataButton />
     </div>
     <BoardFilter />
     {#if filteredApplications.length > 0}

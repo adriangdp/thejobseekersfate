@@ -60,13 +60,20 @@ export async function dbUpdateJob(job:JobEntry){
         return;
     }
 
-    console.log("Updating...");
     const { data, error} = await supabaseClient.from('jobtrack').update(job).eq("id",job.id).select();
 
     if(error){
         throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`);
     }
 
-    console.log("Updated: " + data);
+}
 
+export async function dbClearUserRows(){
+    if(!session.user){
+        return;
+    }
+    const { data, error} = await supabaseClient.from('jobtrack').delete().neq("id", -1)
+    if(error){
+        throw new Error(`ERROR: ${error.code} ${error.cause} -- ${error.message}`);
+    }
 }

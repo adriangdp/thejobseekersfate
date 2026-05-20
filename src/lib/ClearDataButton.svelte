@@ -1,5 +1,8 @@
 <script lang="ts">
 
+    import { dbClearUserRows } from "../service/data-functions.svelte";
+    import { jobData } from "../store/data-store.svelte";
+
     let isFolded:boolean = $state(true)
 
     const handleunFold = async():Promise<void> =>{
@@ -8,7 +11,8 @@
     }
 
     const handleClearTable = () =>{
-        //clearTable();
+        dbClearUserRows();
+        jobData.clear();
         isFolded = true;
     }
 

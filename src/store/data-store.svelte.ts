@@ -16,5 +16,8 @@ export const jobData = {
     },
     remove (id: number) { 
         jobStore = jobStore.filter((e:JobEntry) => e.id !== id);
+    },
+    clear (){
+        jobStore = []
     }
 }

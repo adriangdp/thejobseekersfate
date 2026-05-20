@@ -26,7 +26,7 @@
         class="relative w-full aspect-2/4 md:aspect-2/3 px-5 py-4 bg-accent-inner border-accent-outer border bg-radial from-white/0 to-white/0 overflow-hidden">        
         <div class="relative mx-auto h-1/3 md:h-1/3 flex flex-col md:justify-end">
             <img src={JobStyle.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
-            <strong class="flex items-center justify-center text-sm sm:text-base md:text-xl grow text-center">&#149;{status}&#149;</strong>
+            <strong class="flex items-center justify-center text-sm sm:text-base md:text-xl grow text-center">&#149; {JobStyling[status].figureName} &#149;</strong>
         </div>
         <div class="z-20 relative mt-8 md:mt-4 lg:mt-4">
             <div class="flex flex-col gap-1 md:gap-2 items-center">

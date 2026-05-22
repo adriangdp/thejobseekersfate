@@ -1,11 +1,29 @@
 @import "tailwindcss";
 
 @theme{
-  --color-background: #1b1613;
-  --color-text-body: #948E87;
-  --color-text-darker: #6F6962;
-  --color-accent-outer: #3d372b;
-  --color-accent-inner: #28241b;
+ /*--color-background: #142030;
+  --color-text-body: #E9D8C8;
+  --color-text-darker: #FF5C8D;
+  --color-accent-outer: #33A5DE;
+  --color-accent-inner: #142030;*/
+
+  /*--color-background: #1A2342;
+  --color-text-body: #E4D3B4;
+  --color-text-darker: #C2A308;
+  --color-accent-outer: #4A4066;
+  --color-accent-inner: #2F4945;*/
+
+    /*--color-background: #37IE13;
+  --color-text-body: #c0AA8A;
+  --color-text-darker: #734F3I;
+  --color-accent-outer: #734F3I;
+  --color-accent-inner: #2F4945;*/
+
+  --color-background: #2B160D;
+  --color-text-body: #C9B79C;
+  --color-text-darker: #B87447;
+  --color-accent-outer: #734F31;
+  --color-accent-inner: #50492F;
 
   --color-card-offer: #817866;
   --color-card-applied: #9c9549;
@@ -83,7 +101,7 @@
   }
 
   button, input, select{
-    @apply border-2 border-accent-outer bg-accent-inner p-2 rounded-sm 
+    @apply border-0 border-accent-outer bg-accent-inner p-3 rounded-md
   }
 
   a{

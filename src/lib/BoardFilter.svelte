@@ -5,10 +5,10 @@
 </script>
 
 <div class="my-5">
-    <ul class="flex flex-wrap justify-center gap-4">
+    <ul class="grid grid-cols-3 lg:grid-cols-6 gap-2">
         <li>
             <button onclick={()=>filterStates.showOffer = !filterStates.showOffer}
-                class={`${filterStates.showOffer? '':'bg-background'} ${filterStates.showOffer? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showOffer? '':'bg-background'} ${filterStates.showOffer? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.offer.icon} 
                     alt={`Filter by ${JobStyling.offer.state} icon`}
@@ -19,7 +19,7 @@
         </li>
         <li>
             <button onclick={()=>filterStates.showApplied = !filterStates.showApplied}
-                class={`${filterStates.showApplied? '':'bg-background'} ${filterStates.showApplied? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showApplied? '':'bg-background'} ${filterStates.showApplied? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.applied.icon} 
                     alt={`Filter by ${JobStyling.applied.state} icon`}
@@ -30,7 +30,7 @@
         </li>
         <li>
             <button onclick={()=>filterStates.showInterview = !filterStates.showInterview}
-                class={`${filterStates.showInterview? '':'bg-background'} ${filterStates.showInterview? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showInterview? '':'bg-background'} ${filterStates.showInterview? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.interview.icon} 
                     alt={`Filter by ${JobStyling.interview.state} icon`}
@@ -41,7 +41,7 @@
         </li>
         <li>
             <button onclick={()=>filterStates.showRejected = !filterStates.showRejected}
-                class={`${filterStates.showRejected? '':'bg-background'} ${filterStates.showRejected? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showRejected? '':'bg-background'} ${filterStates.showRejected? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.rejected.icon} 
                     alt={`Filter by ${JobStyling.rejected.state} icon`}
@@ -52,7 +52,7 @@
         </li>
         <li>
             <button onclick={()=>filterStates.showGhosted = !filterStates.showGhosted}
-                class={`${filterStates.showGhosted? '':'bg-background'} ${filterStates.showGhosted? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showGhosted? '':'bg-background'} ${filterStates.showGhosted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.ghosted.icon} 
                     alt={`Filter by ${JobStyling.ghosted.state} icon`}
@@ -63,7 +63,7 @@
         </li>       
         <li>
             <button onclick={()=>filterStates.showAccepted = !filterStates.showAccepted}
-                class={`${filterStates.showAccepted? '':'bg-background'} ${filterStates.showAccepted? '':'border-accent-outer/50'}`}
+                class={`w-full h-full ${filterStates.showAccepted? '':'bg-background'} ${filterStates.showAccepted? '':'border-accent-outer/50'}`}
             >
                 <img src={JobStyling.accepted.icon} 
                     alt={`Filter by ${JobStyling.accepted.state} icon`}
@@ -72,9 +72,9 @@
                 <span class="text-sm">{JobStyling.accepted.state}</span>
             </button>
         </li>
-        <li>
+        <li class="col-span-1 lg:col-start-1 lg:col-end-4 xl:col-start-2 xl:col-end-4">
             <select bind:value={filterStates.sortBy}
-                class="bg-accent-inner h-full"            
+                class="w-full h-full bg-accent-inner"            
             >
                 <option value={enumSortModes.default}>Default</option>
                 <option value={enumSortModes.date}>Date</option>
@@ -82,9 +82,9 @@
                 <option value={enumSortModes.status}>Status</option>
             </select>
         </li>
-        <li>
+        <li class="col-start-3 col-end-4 lg:col-start-4 lg:col-end-7 xl:col-start-4 xl:col-end-6">
             <select bind:value={filterStates.isAscendent} 
-                class="bg-accent-inner h-full"
+                class="w-full h-full bg-accent-inner"
             >
                 <option value={false}>
                     Desc./Newest

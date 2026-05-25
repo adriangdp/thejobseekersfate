@@ -5,7 +5,7 @@ export const JobStyling:JobStylingDictionary = {
     offer:{
         state: enumJobStatus.offer,
         figureName:"The Wheel of Fortune",
-        icon: "/img/icon-fortunewheel.png",
+        icon: "/img/icon-offer.png",
         styles:{
             color:"color-card-offer",
             background:"bg-card-offer",
@@ -22,7 +22,7 @@ export const JobStyling:JobStylingDictionary = {
     applied:{
         state: enumJobStatus.applied,
         figureName:"The Waiting",
-        icon: "/img/icon-sandclock.png",
+        icon: "/img/icon-applied.png",
         styles:{
             color:"color-card-applied",
             background:"bg-card-applied",
@@ -38,7 +38,7 @@ export const JobStyling:JobStylingDictionary = {
     rejected:{
         state: enumJobStatus.rejected,
         figureName:"The Reaper",
-        icon: "/img/icon-reaper.png",
+        icon: "/img/icon-rejected.png",
         styles:{
             color:"color-card-rejected",
             background:"bg-card-rejected",
@@ -54,7 +54,7 @@ export const JobStyling:JobStylingDictionary = {
     interview:{
         state: enumJobStatus.interview,
         figureName:"The Judgement",
-        icon: "/img/icon-scale.png",
+        icon: "/img/icon-interview.png",
         styles:{
             color:"color-card-interview",
             background:"bg-card-interview",
@@ -86,7 +86,7 @@ export const JobStyling:JobStylingDictionary = {
     accepted:{
         state: enumJobStatus.accepted,
         figureName:"The Star",
-        icon: "/img/icon-star.png",
+        icon: "/img/icon-accepted.png",
         styles:{
             color:"color-card-accepted",
             background:"bg-card-accepted",

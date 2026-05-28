@@ -25,9 +25,9 @@
             <SwitchView bind:isCardDisplay/>
             {#if !session.loading && session.user}
             <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
-                    class="flex gap-3"
+                    class="flex items-center gap-3"
             > 
-                <img  src="/img/icon-add.png" alt="add job application button icon" width="24px" height="24px" class="brightness-200"/>
+                <img  src="/img/icon-add.png" alt="add job application button icon" class="w-7 h-7"/>
                 <span>Add Job Application</span>
             </button>
             {/if}

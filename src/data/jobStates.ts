@@ -22,7 +22,7 @@ export const JobStyling:JobStylingDictionary = {
     applied:{
         state: enumJobStatus.applied,
         figureName:"The Waiting",
-        icon: "/img/icon-applied.png",
+        icon: "/img/icon-applied.svg",
         styles:{
             color:"color-card-applied",
             background:"bg-card-applied",

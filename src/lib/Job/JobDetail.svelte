@@ -1,18 +1,26 @@
 <script lang="ts">
     import { enumJobStatus } from "@data/enum";
-    import type { Job, JobEntry, JobPost } from "@data/types";    
-    import { JobStyling } from "@data/jobStates";
+    import type { JobEntry, JobPost, JobStyle } from "@data/types";    
     import { applicationSchema } from "@data/validation-schemas";
-    import { jobData } from "../store/data-store.svelte";
-    import { dbUpdateJob, dbDeleteJob } from "../service/data-functions.svelte";
+    import { jobData } from "@store/data-store.svelte";
+    import { dbUpdateJob, dbDeleteJob } from "@service/data-functions.svelte";
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
     import BadgeStatusChanger from "@lib/common/BadgeStatusChanger.svelte";
     import DeleteJobApplication from "@lib/DeleteJobApplication.svelte";
     import Modal from "@lib/Modal.svelte";
-  import { iso, unknown } from "zod";
 
 
-    let  { isOpen = $bindable(), application } : {application: JobEntry, isOpen: boolean} = $props();
+    let { 
+        application, 
+        applied_date,
+        jobStyle,
+        showDetail = $bindable() 
+    } : { 
+        application: JobEntry,
+        applied_date: Date | null,
+        jobStyle: JobStyle,
+        showDetail: boolean,
+    } = $props(); 
     let { 
         id,
         status, 
@@ -20,11 +28,8 @@
         company, 
         mode, 
         salary, 
-        link, 
-        applied_date 
+        link
     } = $derived(application);
-    let dateObject = $derived(applied_date ? new Date(applied_date) : null)
-    let jobStyle = $derived(JobStyling[status]);
 
     let editableDate = $derived(applied_date ?? new Date().toISOString().split('T')[0] );
     let editableSalary = $derived(salary);
@@ -73,22 +78,22 @@
         //add proper error handling
         await dbDeleteJob(id)
         jobData.remove(id)
-        isOpen = false;
+        showDetail = false;
     }
 
 </script>
 
-<Modal bind:isOpen>
+<Modal bind:isOpen = {showDetail} backgroundColor={jobStyle.styles.background}>
     <div class="flex flex-col">
         <div class="flex justify-between items-center gap-4 md:gap-6 w-full">
-            <img src={jobStyle.icon} alt={`${status} icon status`} class="mx-auto mix-blend-color-dodge w-18 md:w-26 lg:w-22"/>
+            <img src={jobStyle.icon} alt={`${status} icon status`} class="mx-auto brightness-80 w-24 md:w-26 lg:w-32"/>
             <div>
                 {#if !editDataMode}
-                <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">{company}</span>              
+                <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl text-text-darker">{company}</span>              
                 {:else}
-                <input class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl" bind:value={company}/>               
+                <input class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl text-text-darker" bind:value={company}/>               
                 {/if}
-                <span class="block font-rosarivo text-text-darker text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {jobStyle.figureName}  &#149;</span>
+                <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {jobStyle.figureName}  &#149;</span>
             </div>
         </div>
         <div class="mt-12 flex flex-col gap-5 md:gap-6">
@@ -100,50 +105,49 @@
                         {/if}
                     </button>
                 </div>                
-                <div>
-                    <img src="/img/icon-building.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
+                <div>                    
                     {#if !editDataMode && position}
-                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{position}</span>
+                    <span class="ml-2 md:ml-3 md:text-lg text-text-darker">{position}</span>
                     {:else if !editDataMode}
-                    <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">unknown</span>
+                    <span class="ml-2 md:ml-3 md:text-lg lg:text-base text-text-darker">unknown</span>
                     {:else}
-                    <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={position} />
+                    <input class="ml-2 md:ml-3 md:text-lg lg:text-base text-text-darker" bind:value={position} />
                     {/if}
                 </div>
                 <div>
-                    <img src="/img/icon-byhorse.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
+                    <img src="/img/icon-mode.png" alt="work mode icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">{mode? `${mode}`:'Unkown'}</span>
+                        <span class="ml-2 md:ml-3 text-text md:text-lg lg:text-base">{mode? `${mode}`:'Unkown'}</span>
                     {:else}
-                        <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={mode} />
+                        <input class="ml-2 md:ml-3 text-text md:text-lg lg:text-base" bind:value={mode} />
                     {/if}
                 </div>
                 <div>
-                    <img src="/img/icon-coin.png" alt="salary icon"  class="w-8 md:w-9 inline" />
+                    <img src="/img/icon-salary.png" alt="salary icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">
+                        <span class="ml-2 md:ml-3 text-text md:text-lg lg:text-base">
                             { 
                                 salary ? Number(salary).toLocaleString('es-ES')+" €" : "unknown"
                             }
                         </span>
                     {:else}
-                        <input type="number" class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={editableSalary} />
+                        <input type="number" class="ml-2 md:ml-3 text-text md:text-lg lg:text-base" bind:value={editableSalary} />
                     {/if}
                 </div>
                 <div>
-                    <img src="/img/icon-calendar.png" alt="added date icon"  class="w-8 md:w-9 inline" />
+                    <img src="/img/icon-date.png" alt="added date icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">
+                        <span class="ml-2 md:ml-3 text-text md:text-lg lg:text-base">
                             {
-                                dateObject ?
-                                    `${dateObject.getDay().toString().padStart(2,"0")}/${dateObject.getMonth().toString().padStart(2,"0")}/${dateObject.getFullYear()}`
+                                applied_date ?
+                                    `${applied_date.getDate().toString().padStart(2,"0")}/${(applied_date.getMonth() + 1).toString().padStart(2,"0")}/${applied_date.getFullYear()}`
                                 :
                                     `No date`  
                             }
                         </span>
                     {:else}
                         <input
-                        class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base"
+                        class="ml-2 md:ml-3 text-text md:text-lg lg:text-base"
                         type="date"                         
                         name="input-date"                                          
                         max={new Date().toISOString().split('T')[0]}
@@ -155,11 +159,11 @@
                 <div>
                     <img src="/img/icon-link.png" alt="added date icon"  class="w-8 md:w-9 inline" />
                     {#if !editDataMode && link}
-                        <a href={link} class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">Link to offer</a>
+                        <a href={link} class="ml-2 md:ml-3 text-text md:text-lg lg:text-base">Link to offer</a>
                     {:else if !editDataMode}
-                        <span class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base">No link recorded</span>
+                        <span class="ml-2 md:ml-3 text-text md:text-lg lg:text-base">No link recorded</span>
                     {:else if editDataMode}
-                        <input class="ml-2 md:ml-3 text-text-darker md:text-lg lg:text-base" bind:value={editableLink} />
+                        <input class="ml-2 md:ml-3 text-text md:text-lg lg:text-base" bind:value={editableLink} />
                     {/if}
                 </div>     
         </div>

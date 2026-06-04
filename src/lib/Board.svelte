@@ -5,7 +5,7 @@
     import { applyFiltersAndSort, isAllFiltersOff } from "../store/filter-store.svelte";
     import AddApplication from "@lib/AddApplication.svelte"
     import BoardFilter from "@lib/BoardFilter.svelte"
-    import JobDisplay from "@lib/JobDisplay.svelte"
+    import JobDisplay from "@lib/Job/JobDisplay.svelte"
     import Modal from "@lib/Modal.svelte"
     import SwitchView from "@lib/SwitchView.svelte"
     import ClearDataButton from "@lib/ClearDataButton.svelte";
@@ -25,7 +25,7 @@
             <SwitchView bind:isCardDisplay/>
             {#if !session.loading && session.user}
             <button onclick={()=>{showAddApplicationModal = !showAddApplicationModal}}
-                    class="flex items-center gap-3"
+                class="flex items-center gap-3"
             > 
                 <img  src="/img/icon-add.png" alt="add job application button icon" class="w-7 h-7"/>
                 <span>Add Job Application</span>
@@ -36,9 +36,12 @@
     </div>
     <BoardFilter />
     {#if session.user && !session.loading}
+        <div class="my-3">
+            <p>Showing {filteredApplications.length} of {jobData.values.length} applications</p>
+        </div>
         {#if filteredApplications.length > 0}
             {#if isCardDisplay}
-                <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 md:gap-4 lg:gap-6">
+                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-7 gap-3 lg:gap-6">
                     {#each filteredApplications as cardApplication}
                         <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
                     {/each}

@@ -19,6 +19,7 @@ export type JobStyle ={
         text:string,
         bgGradient:string
         badge:{
+            text:string,
             border:string,
             background:string,
         }

@@ -1,40 +1,42 @@
 @import "tailwindcss";
 
 @theme{
- /*--color-background: #142030;
-  --color-text-body: #E9D8C8;
-  --color-text-darker: #FF5C8D;
-  --color-accent-outer: #33A5DE;
-  --color-accent-inner: #142030;*/
-
-  /*--color-background: #1A2342;
-  --color-text-body: #E4D3B4;
-  --color-text-darker: #C2A308;
-  --color-accent-outer: #4A4066;
-  --color-accent-inner: #2F4945;*/
-
-    /*--color-background: #37IE13;
-  --color-text-body: #c0AA8A;
-  --color-text-darker: #734F3I;
-  --color-accent-outer: #734F3I;
-  --color-accent-inner: #2F4945;*/
 
   --color-background: #2B160D;
   --color-text-body: #C9B79C;
-  --color-text-darker: #B87447;
-  --color-accent-outer: #734F31;
-  --color-accent-inner: #50492F;
+  --color-text-darker: #F0B186;
+  --color-accent-outer: #59402D; /*#734F31*/
+  --color-accent-inner: #4D4827; /*#50492F*/
 
-  --color-card-offer: #817866;
-  --color-card-applied: #9c9549;
-  --color-card-interview: #30375f;
-  --color-card-rejected: #a70000;
-  --color-card-ghosted: #424a4e;
-  --color-card-accepted: #5d6b49;
 
-  --font-rosarivo: "Rosarivo", Georgia, "Times New Roman", Times, serif;
-  --font-alegreya: "Alegreya Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+  --color-card-offer: oklch(0.5756 0.0288 84.56);
+  --color-card-offer-lighter: oklch(0.8256 0.0288 84.56);
+  --color-card-offer-darker: oklch(0.4356 0.0288 84.56);
+  
+  --color-card-applied: oklch(0.36 0.0258 10.97);
+  --color-card-applied-lighter: oklch(0.76 0.0258 10.97);
+  --color-card-applied-darker: oklch(0.26 0.0258 10.97);
 
+  --color-card-interview: oklch(0.3507 0.0702 274.69);
+  --color-card-interview-lighter: oklch(0.7507 0.0702 274.69);
+  --color-card-interview-darker: oklch(0.2207 0.0702 274.69);
+
+  --color-card-rejected: oklch(0.4574 0.1877 29.23);
+  --color-card-rejected-lighter: oklch(0.8574 0.1877 29.23);
+  --color-card-rejected-darker: oklch(0.3274 0.1877 29.23);
+
+  --color-card-ghosted: oklch(0.40 0.0124 229.19);
+  --color-card-ghosted-lighter: oklch(0.85 0.0124 229.19);
+  --color-card-ghosted-darker: oklch(0.3 0.0124 229.19);
+  
+  --color-card-accepted: oklch(0.5108 0.0807 131.85);
+  --color-card-accepted-lighter: oklch(0.8408 0.0807 131.85);
+  --color-card-accepted-darker: oklch(0.4 0.0807 131.85);
+
+  --font-header: "Abril Fatface", Georgia, "Times New Roman", Times, serif;
+  --font-body-text: "Work Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
+
+  --inset-shadow-card: inset 0 0 3.15em 1.37em rgba(0,0,0,.355); 
 
   --animate-falldown: falldown .35s 0s linear 1 forwards;
   --animate-falldown-reverse: falldownReverse .35s 0s linear 1 forwards;
@@ -81,7 +83,12 @@
 
 @layer base{
   *:focus{
-    @apply outline-none ring-1 ring-accent-outer
+    @apply outline-none ring-2 ring-text-darker
+  }
+
+  html, body{
+    max-width: screen;
+    overflow-x: hidden;
   }
 
   html, dialog{
@@ -90,18 +97,18 @@
   }
 
   h1,h2,h3,h4,h5,h6,q,strong,label{
-    font-family: var(--font-rosarivo);
-    letter-spacing: 0.05em;
+    font-family: var(--font-header);
+    letter-spacing: 0.14rem;
+    font-weight: 300;
   }
 
   p,a,li,span,aside,em,i{
-    font-family: var(--font-alegreya);
+    font-family: var(--font-body-text);
     font-weight: 500;
-    letter-spacing: 0.15em;
   }
 
   button, input, select{
-    @apply border-0 border-accent-outer bg-accent-inner p-3 rounded-md
+    @apply bg-accent-inner p-3 rounded-md
   }
 
   a{
@@ -112,10 +119,14 @@
 
 @layer components{
 
-
+  .text-header{
+    @apply font-header tracking-[0.14rem]
+  }
   .button-invisible{
     @apply border-0 bg-transparent p-2 rounded-none cursor-pointer
   }
-
+  .button-outlined{
+    @apply bg-transparent ring-1 ring-text-body transition-transform duration-70 hover:ring-2 hover:ring-text-darker hover:-translate-y-0.5 focus:ring-2
+  }
 }
 

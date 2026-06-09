@@ -1,17 +1,21 @@
 <script lang="ts">
     import { enumJobStatus } from "@data/enum";
+    import type { JobStyle } from "@data/types";
  
     import BadgeStatus from "@lib/common/BadgeStatus.svelte";
-    let{state, callback} : { 
+    let{state, jobStyle, callback} : { 
         state: enumJobStatus, 
+        jobStyle: JobStyle
         callback:(newStatus:enumJobStatus)=>void} 
     = $props();
+    let background = $derived(jobStyle.styles.badge.background);
+    let border = $derived(jobStyle.styles.badge.border);
 
 </script>
 
 
 
-<div class="z-20 absolute top-[110%] left-0 w-fit h-fit p-3 bg-background border border-accent-outer flex flex-wrap gap-2 animate-revealcard duration-300">
+<div class={`z-20 absolute top-[105%] left-0 w-fit h-fit p-3 rounded-md ${background} border ${border} flex flex-wrap gap-2 animate-revealcard duration-300`}>
    
     {#each Object.values(enumJobStatus) as enumStatus}
         {#if enumStatus !== state}

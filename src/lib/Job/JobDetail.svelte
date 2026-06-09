@@ -96,12 +96,12 @@
                 <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {jobStyle.figureName}  &#149;</span>
             </div>
         </div>
-        <div class="mt-12 flex flex-col gap-5 md:gap-6">
+        <div class="mt-6 flex flex-col gap-5 md:gap-6">
                 <div>
                     <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatusFlag = !editStatusFlag}}>
                         <BadgeStatus status={status as enumJobStatus} />   
                         {#if editStatusFlag}
-                            <BadgeStatusChanger state={status} callback={handleBadgeChange}></BadgeStatusChanger>
+                            <BadgeStatusChanger state={status} callback={handleBadgeChange} jobStyle={jobStyle}></BadgeStatusChanger>
                         {/if}
                     </button>
                 </div>                
@@ -170,7 +170,7 @@
         <div class="mt-12 w-full flex gap-3">
             {#if editDataMode == false}
             <button 
-                class="grow flex items-center justify-center gap-1 w-1/2" 
+                class={`grow flex items-center justify-center gap-1 w-1/2 button-outlined ${jobStyle.styles.background}`}
                 onclick={()=> editDataMode = true}
             >
                 <img src="/img/icon-edit.png" 
@@ -183,7 +183,7 @@
             </button>
             {:else}
             <button 
-                class="grow flex items-center justify-center gap-1 w-1/2" 
+                class={`grow flex items-center justify-center gap-1 w-1/2 button-outlined ${jobStyle.styles.background}`}
                 onclick={handleModify}
             >
                 <img src="/img/icon-edit.png" 

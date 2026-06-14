@@ -84,21 +84,21 @@
 </script>
 
 <Modal bind:isOpen = {showDetail} backgroundColor={jobStyle.styles.background}>
-    <div class="flex flex-col">
-        <div class="flex justify-between items-center gap-4 md:gap-6 w-full">
-            <img src={jobStyle.icon} alt={`${status} icon status`} class="mx-auto brightness-80 w-24 md:w-26 lg:w-32"/>
-            <div>
+    <div class="flex flex-col aspect-[1/1.5] md:aspect-1/2 max-w-full w-[260px] md:w-[300px] lg:w-[350px]">
+        <div class="flex flex-col md:flex-row justify-center items-center md:gap-6 w-full">
+            <img src={jobStyle.icon} alt={`${status} icon status`} class="brightness-80 w-24 md:w-26 lg:w-32"/>
+            <div class="w-full max-w-full flex flex-col items-center justify-center">
                 {#if !editDataMode}
                 <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl text-text-darker">{company}</span>              
                 {:else}
                 <input class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl text-text-darker" bind:value={company}/>               
                 {/if}
-                <span class="block font-rosarivo text-center text-wrap text-lg md:text-2xl lg:text-xl">&#149;  {jobStyle.figureName}  &#149;</span>
+                <p class="min-w-10 max-w-full font-rosarivo text-center text-wrap wrap-break-word text-lg md:text-2xl lg:text-xl">{jobStyle.figureName}</p>
             </div>
         </div>
-        <div class="mt-6 flex flex-col gap-5 md:gap-6">
+        <div class="mt-8 flex flex-col gap-5 md:gap-6">
                 <div>
-                    <button class="button-invisible p-0 relative flex gap-2" onclick={()=>{editStatusFlag = !editStatusFlag}}>
+                    <button class="button-invisible p-0 relative" onclick={()=>{editStatusFlag = !editStatusFlag}}>
                         <BadgeStatus status={status as enumJobStatus} />   
                         {#if editStatusFlag}
                             <BadgeStatusChanger state={status} callback={handleBadgeChange} jobStyle={jobStyle}></BadgeStatusChanger>

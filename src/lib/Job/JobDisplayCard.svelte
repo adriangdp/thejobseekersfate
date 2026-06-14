@@ -28,10 +28,8 @@
         class={`relative w-full aspect-1/1.5 md:aspect-1/2 px-5 py-4 lg:py-12 lg:px-8 overflow-hidden ${jobStyle.styles.background}`} >        
         <div class="relative w-full lg:mb-10 mx-auto h-1/3 md:h-1/3 flex flex-col md:justify-center">
             <img src={jobStyle.icon} alt={`${status} icon status`} class="mx-auto w-24 md:w-26 lg:w-32 brightness-80"/>
-            <div>
-                <span aria-hidden="true" class="text-base md:text-xl text-center font-bold inline">&#149;</span>
+            <div class="mt-2">
                 <strong class="text-base md:text-xl text-center inline"> {JobStyling[status].figureName}</strong>
-                <span aria-hidden="true" class="text-base md:text-xl text-center font-bold inline">&#149;</span>
             </div>            
         </div>
         <div class="z-20 relative mt-8 md:mt-4 lg:mt-4 w-full">

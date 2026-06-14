@@ -1,10 +1,10 @@
 <header class="w-11/12 mt-9 mx-auto">
     <div class="flex justify-center items-center">
         <span aria-hidden="true" class="mx-1 text-text-darker/70">&#x25C6;</span>
-        <h1 class="text-2xl text-center block">The Jobseeker's Fate</h1>                        
+        <h1 class="text-2xl text-center block">The Jobseeker's Grove</h1>                        
         <span aria-hidden="true" class="mx-1 text-text-darker/70">&#x25C6;</span>
     </div>    
-    <p aria-roledescription="subtitle" class="text-sm text-center text-text-darker">A mystical app for the jobseeker striving to find the path to their career</p>   
+    <p aria-roledescription="subtitle" class="text-sm text-center text-text-darker">A whimsical walk through the job posting grove</p>   
     <hr/>
 
 </header>

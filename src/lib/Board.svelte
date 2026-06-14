@@ -41,7 +41,7 @@
         </div>
         {#if filteredApplications.length > 0}
             {#if isCardDisplay}
-                <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-7 gap-3 lg:gap-6">
+                <div class="mx-auto md:mx-0 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-7 gap-3 lg:gap-6 max-w-62.5 md:max-w-full">
                     {#each filteredApplications as cardApplication}
                         <JobDisplay application={cardApplication} isCardDisplay={true}></JobDisplay>
                     {/each}

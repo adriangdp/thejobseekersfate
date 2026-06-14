@@ -8,7 +8,9 @@
 
     const handleClose = () =>{
         isClosing = true;
-        setTimeout(()=>{isOpen = false}, 400);
+        setTimeout(()=>{
+            isOpen = false
+        }, 400);
     }
 
 </script>

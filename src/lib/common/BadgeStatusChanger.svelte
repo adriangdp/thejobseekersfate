@@ -15,7 +15,7 @@
 
 
 
-<div class={`z-20 absolute top-[105%] left-0 w-fit h-fit p-3 rounded-md ${background} border ${border} flex flex-wrap gap-2 animate-revealcard duration-300`}>
+<div class={`z-20 absolute top-[105%] left-0 w-fit h-fit p-3 rounded-md ${background} border ${border} flex flex-wrap gap-2 animate-fadeIn duration-[3s]`}>
    
     {#each Object.values(enumJobStatus) as enumStatus}
         {#if enumStatus !== state}

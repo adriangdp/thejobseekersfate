@@ -21,9 +21,9 @@
   --color-card-interview-lighter: oklch(0.7507 0.0702 274.69);
   --color-card-interview-darker: oklch(0.2207 0.0702 274.69);
 
-  --color-card-rejected: oklch(0.4574 0.1877 29.23);
-  --color-card-rejected-lighter: oklch(0.8574 0.1877 29.23);
-  --color-card-rejected-darker: oklch(0.3274 0.1877 29.23);
+  --color-card-rejected: oklch(0.4574 0.14 12.54);
+  --color-card-rejected-lighter: oklch(0.8574 0.14 12.54);
+  --color-card-rejected-darker: oklch(0.3274 0.14 12.54);
 
   --color-card-ghosted: oklch(0.40 0.0124 229.19);
   --color-card-ghosted-lighter: oklch(0.85 0.0124 229.19);
@@ -33,14 +33,15 @@
   --color-card-accepted-lighter: oklch(0.8408 0.0807 131.85);
   --color-card-accepted-darker: oklch(0.4 0.0807 131.85);
 
-  --font-header: "Abril Fatface", Georgia, "Times New Roman", Times, serif;
+  --font-header: "Caudex", Georgia, "Times New Roman", Times, serif;
   --font-body-text: "Work Sans", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", sans-serif;
 
   --inset-shadow-card: inset 0 0 3.15em 1.37em rgba(0,0,0,.355); 
 
-  --animate-falldown: falldown .35s 0s linear 1 forwards;
-  --animate-falldown-reverse: falldownReverse .35s 0s linear 1 forwards;
-  --animate-revealcard: revealCard .35s 0s ease 1 forwards;
+  --animate-falldown: falldown .30s 0s linear 1 forwards;
+  --animate-falldown-reverse: falldownReverse .30s 0s linear 1 forwards;
+  --animate-revealcard: revealCard .30s 0s ease 1 forwards;
+  --animate-fadeIn: fadeIn .25s 0s ease-out 1 forwards;
 
   @keyframes falldown{
     0%{
@@ -51,22 +52,31 @@
       opacity: 0%;
     }
     100%{
-      opacity: 100%;
+      opacity: 1;
       transform:translateY(0)
     }
   }
 
   @keyframes falldownReverse{
     0%{
-      opacity: 100%;
+      opacity: 1;
       transform:translateY(0);
     }
     25%{
-      opacity: 100%;
+      opacity: 1;
     }
     100%{
       opacity: 0;
       transform:translateY(-30vh)
+    }
+  }
+
+  @keyframes fadeIn{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
     }
   }
 
@@ -98,7 +108,7 @@
 
   h1,h2,h3,h4,h5,h6,q,strong,label{
     font-family: var(--font-header);
-    letter-spacing: 0.14rem;
+    letter-spacing: 0.095rem;
     font-weight: 300;
   }
 
@@ -107,12 +117,20 @@
     font-weight: 500;
   }
 
+  button, select{
+    @apply bg-accent-inner p-2
+  }
+
   button, input, select{
-    @apply bg-accent-inner p-3 rounded-md
+    @apply rounded-md
+  }
+
+  input{
+    @apply ring px-2 bg-black/30
   }
 
   a{
-    @apply text-card-accepted decoration-card-accepted underline decoration-dotted underline-offset-7 lg:underline-offset-4 hover:decoration-card-offer hover:text-card-offer visited:text-card-accepted visited:decoration-card-accepted
+    @apply text-text-darker decoration-text-darker underline decoration-dotted underline-offset-7 lg:underline-offset-4 hover:brightness-135 visited:text-card-accepted visited:decoration-card-accepted
   }
   
 }
@@ -120,7 +138,7 @@
 @layer components{
 
   .text-header{
-    @apply font-header tracking-[0.14rem]
+    @apply font-header tracking-[0.095rem]
   }
   .button-invisible{
     @apply border-0 bg-transparent p-2 rounded-none cursor-pointer

@@ -4,8 +4,8 @@ import { enumJobStatus } from "@data/enum";
 export const JobStyling:JobStylingDictionary = {
     offer:{
         state: enumJobStatus.offer,
-        figureName:"The Wheel of Fortune",
-        icon: "/img/icon-offer.png",
+        figureName:"The Oportunity",
+        icon: "/img/icon-no-art-yet.webp",
         styles:{
             color:"color-card-offer",
             background:"bg-card-offer",
@@ -22,8 +22,8 @@ export const JobStyling:JobStylingDictionary = {
 
     applied:{
         state: enumJobStatus.applied,
-        figureName:"The Waiting",
-        icon: "/img/icon-applied.svg",
+        figureName:"The Expectation",
+        icon: "/img/icon-applied.webp",
         styles:{
             color:"color-card-applied",
             background:"bg-card-applied",
@@ -39,8 +39,8 @@ export const JobStyling:JobStylingDictionary = {
     },
     rejected:{
         state: enumJobStatus.rejected,
-        figureName:"The Reaper",
-        icon: "/img/icon-rejected.png",
+        figureName:"The Red Mushroom",
+        icon: "/img/icon-no-art-yet.webp",
         styles:{
             color:"color-card-rejected",
             background:"bg-card-rejected",
@@ -56,8 +56,8 @@ export const JobStyling:JobStylingDictionary = {
     },
     interview:{
         state: enumJobStatus.interview,
-        figureName:"The Judgement",
-        icon: "/img/icon-interview.png",
+        figureName:"The Chatter",
+        icon: "/img/icon-no-art-yet.webp",
         styles:{
             color:"color-card-interview",
             background:"bg-card-interview",
@@ -74,7 +74,7 @@ export const JobStyling:JobStylingDictionary = {
     ghosted:{        
         state: enumJobStatus.ghosted,
         figureName:"The Ghost",
-        icon: "/img/icon-ghost.svg",
+        icon: "/img/icon-ghost.webp",
         styles:{
             color:"color-card-ghosted",
             background:"bg-card-ghosted",
@@ -90,8 +90,8 @@ export const JobStyling:JobStylingDictionary = {
     },
     accepted:{
         state: enumJobStatus.accepted,
-        figureName:"The Star",
-        icon: "/img/icon-accepted.png",
+        figureName:"The Growth",
+        icon: "/img/icon-no-art-yet.webp",
         styles:{
             color:"color-card-accepted",
             background:"bg-card-accepted",

@@ -1,6 +1,10 @@
-# The Jobseeker's Fate
+# The Jobseeker's Grove
 
-*A mystical app for the jobseeker striving to find the path to their career. It might not tell you the future, but for sure it will tell you your present.*
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8b9d2488-44c5-4f73-98b8-b9114afa4776/deploy-status)](https://app.netlify.com/projects/thejobseekersgrove/deploys) 
+
+[Live Demo](https://thejobseekersfate.netlify.app/)
+
+*A whimsical walk through the jobposting grove. In the grove of job postings, there might be great opportunities or, at least, funny little critters.*
 
 ![/mockup.webp](/public/mockup.webp)
 
@@ -20,7 +24,7 @@
 
 ## Features
 
-The Jobseeker's Fate is a lightweight application to keep track of Job applications with a humorous touch (so you can keep the spirits up!). 
+The Jobseeker's Grove is a lightweight application to keep track of Job applications with a humorous touch (so you can keep the spirits up!). 
 
 - **Job Application Tracking:** Uses supabase to store job applications, so you can access to your tracked offers on any platform.<s>Uses local IndexedDB and DexieDB for reactivity and ease of use with Svelte</s>.
 - **Sorting and filtering tools:** Job applications can be filtered and sorted by status, salary, application date.
@@ -178,6 +182,7 @@ npm run test
 ```
 
 ## Known limitations and TODOs
+* <s> Rename repository</s>
 * <s> Zod validates forms correctly, but handling errors gracefully is not yet implemented.</s>
 * <s>More form validation flexibility: defaults, optionals...</s>
 * Improve accesibility and aria attributes.

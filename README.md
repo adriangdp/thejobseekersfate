@@ -176,7 +176,12 @@ pnpm run build
 npm run preview
 ```
 
-#### Test:unit
+#### Test:unit single run
+```bash
+npm run testrun
+```
+
+#### Test:unit default watch mode
 ```bash
 npm run test
 ```

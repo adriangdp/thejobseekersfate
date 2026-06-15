@@ -85,7 +85,7 @@ const sortByDate = (jobs:JobEntry[]):JobEntry[] =>{
         const aDate = a.applied_date ?? "";
         const bDate = b.applied_date ?? "";
 
-        return !filterStates.isAscendent? 
+        return filterStates.isAscendent? 
             aDate.localeCompare(bDate)
         : 
             bDate.localeCompare(aDate)
